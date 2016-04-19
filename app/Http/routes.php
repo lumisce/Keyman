@@ -25,8 +25,9 @@ Route::get('/', ['middleware' => 'guest', 'uses' => 'PagesController@index']);
 
 
 // pagesController = home, about, browse
-// userController = account
-// requestController = index filter=date-asc search=hello page=1, show, create, store, edit, update, destroy
-// customerController = index filter=name-asc search=hello page=1, show, create, store, edit, update, destroy
-// providerController = index filter=name-asc search=hello page=1, show, create, store, edit, update, destroy
-// authController = login, password reset
+// userController = account, create if admin, store if admin, edit, update, destroy if admin
+// requestController = index filter=date-asc search=hello page=1, show, create, store, edit, update, destroy if admin
+// customerController = index filter=name-asc search=hello page=1, show, create, store, edit, update, destroy if admin
+// providerController = index filter=name-asc search=hello page=1, show, create if admin, store if admin, edit if admin, update if admin, destroy if admin
+// authController = login, logout, password reset
+
