@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateCustomerInsurancesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('customer_insurances', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('insurance_id')->unsigned();
+            $table->foreign('insurance_id')
+                ->references('id')
+                ->on('insurances');
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers');
+            $table->decimal('payment', 15, 2);
+            $table->timestamps();
+            $table->timestamp('valid_until');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::drop('customer_insurances');
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+    }
+}
