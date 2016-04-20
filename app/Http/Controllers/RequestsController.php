@@ -10,17 +10,12 @@ class RequestsController extends Controller
 {
     public function index()
     {
-        
-    }
-
-    public function show()
-    {
-        
+        return view('requests.index');
     }
 
     public function create()
     {
-        
+        return view('requests.create');
     }
 
     public function store()
@@ -30,7 +25,7 @@ class RequestsController extends Controller
 
     public function edit()
     {
-        
+        return view('requests.edit');
     }
 
     public function update()

@@ -10,7 +10,7 @@ class InsuranceController extends Controller
 {
     public function create()
     {
-        
+        return view('insurances.create');
     }
 
     public function store()
@@ -20,7 +20,7 @@ class InsuranceController extends Controller
 
     public function edit()
     {
-        
+        return view('insurances.edit');
     }
 
     public function update()

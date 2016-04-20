@@ -10,18 +10,18 @@ class ProvidersController extends Controller
 {
     public function index()
     {
-        
+        return view('providers.index');
     }
 
     public function show()
     {
-        
+        return view('providers.show');
     }
 
     // admin only
     public function create()
     {
-        
+        return view('providers.create');
     }
 
     // admin only
@@ -33,7 +33,7 @@ class ProvidersController extends Controller
     // admin only
     public function edit()
     {
-        
+        return view('providers.edit');
     }
 
     // admin only
