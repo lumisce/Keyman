@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Keyman
                 </a>
             </div>
 
@@ -71,8 +71,21 @@
             </div>
         </div>
     </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                {{-- flash --}}
+                @if (Session::has('flash_notification.message'))
+                    <div class="alert alert-{{ Session::get('flash_notification.level') }}">
+                        {{ Session::get('flash_notification.message') }}
+                    </div>
+                @endif
 
-    @yield('content')
+                @yield('content')
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
