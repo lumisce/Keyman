@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Customer;
+use URL;
 
 class CustomersController extends Controller
 {
@@ -16,7 +17,9 @@ class CustomersController extends Controller
 
     public function index()
     {
-        return view('customers.index');
+        $customers = Customer::all();
+        
+        return view('customers.index', compact('customers'));
     }
 
     public function show(Customer $customer)
@@ -31,13 +34,14 @@ class CustomersController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['title' => 'required', 'body' => 'required']);
+        $this->validate($request, $this->getRules());
 
         $customer = Customer::create($request->all());
 
-        $request->session()->flash('flash_message', 'Customer has been added!');
+        $request->session()->flash('flash_notification.message', 'Customer has been added!');
+        $request->session()->flash('flash_notification.level', 'success');
 
-        return redirect('customers.index');
+        return redirect('customers');
     }
 
     public function edit(Customer $customer)
@@ -45,18 +49,36 @@ class CustomersController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Customer $customer)
+    public function update(Customer $customer, Request $request)
     {
-        $this->validate($request, ['title' => 'required', 'body' => 'required']);
+        $rules = $this->getRules();
+        $rules['email'] = 'unique:customers' . ',id,' . $customer->id;
+        $rules['phone_num'] = 'required|regex:/^\+?[^a-zA-Z]{5,}$/|unique:customers' . ',id,' . $customer->id;
+
+        $this->validate($request, $rules);
 
         $customer->update($request->all());
 
-        return redirect('customers.show')->with('customer');
+        $request->session()->flash('flash_notification.message', 'Customer has been updated!');
+        $request->session()->flash('flash_notification.level', 'success');
+
+        return redirect(URL::route('customers.show', [$customer->id]));
     }
 
     // admin only
     public function destroy()
     {
         
+    }
+
+    private function getRules()
+    {
+        return [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'middle_name' => 'alpha',
+            'email' => 'unique:customers',
+            'phone_num' => 'required|unique:customers|regex:/^\+?[^a-zA-Z]{5,}$/'
+        ];
     }
 }
