@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->admin;
     }
+
+    public function requests()
+    {
+        return $this->belongsToMany('App\Request');
+    }
 }

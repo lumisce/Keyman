@@ -9,4 +9,9 @@ class InsuranceType extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function insurances()
+    {
+        return $this->hasMany('App\Insurance');
+    }
 }
