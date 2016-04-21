@@ -20,14 +20,11 @@ Route::get('account', ['middleware' => 'auth', 'uses' => 'PagesController@accoun
 Route::get('about', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
 Route::get('browse', ['middleware' => 'auth', 'uses' => 'PagesController@browse']);
 
+Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
 Route::resource('customers', 'CustomersController');
-Route::resource('providers', 'ProvidersController');
-Route::resource('providers/{providers}/plans', 'InsuranceController', ['except' => ['index', 'show']]);
 Route::resource('requests', 'RequestsController', ['only' => ['index']]);
-Route::resource('customers/{customers}/requests', 'RequestsController', ['except' => ['index', 'show']]);
-
-// Route::get('tags/{tags}', 'TagsController@show');
-
+Route::resource('providers.plans', 'InsurancesController', ['except' => ['index', 'show']]);
+Route::resource('providers', 'ProvidersController');
 
 
 // pagesController = home, about, browse

@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('customers', 'App\Customer');
         $router->model('providers', 'App\Provider');
+        $router->model('plans', 'App\Insurance');
     }
 
     /**
