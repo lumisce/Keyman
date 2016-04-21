@@ -16,9 +16,9 @@
 Route::auth();
 
 Route::get('/', ['middleware' => 'guest', 'uses' => 'PagesController@index']);
-Route::get('account', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
+Route::get('account', ['middleware' => 'auth', 'uses' => 'PagesController@account']);
 Route::get('about', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
-Route::get('browse', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
+Route::get('browse', ['middleware' => 'auth', 'uses' => 'PagesController@browse']);
 
 Route::resource('customers', 'CustomersController');
 Route::resource('providers', 'ProvidersController');
