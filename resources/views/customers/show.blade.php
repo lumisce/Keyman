@@ -16,5 +16,14 @@
 				<li>{{ $insurance->name }}</li>
 			@endforeach
 		</ul>
+
+		<h5>Requests: {{ $customer->total_requests }}</h5>
+		<ul>
+			@foreach ($customer->requests as $request)
+				<li>{{ $requests->insurance }}</li>
+				<li>{{ $requests->type }}</li>
+				<li>{{ $requests->status }}</li>
+			@endforeach
+		</ul>
 	@endunless
 @stop
