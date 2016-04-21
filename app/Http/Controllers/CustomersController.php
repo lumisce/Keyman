@@ -18,7 +18,7 @@ class CustomersController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        
+
         return view('customers.index', compact('customers'));
     }
 
@@ -35,12 +35,9 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->getRules());
-
         $customer = Customer::create($request->all());
 
-        $request->session()->flash('flash_notification.message', 'Customer has been added!');
-        $request->session()->flash('flash_notification.level', 'success');
-
+        flash()->success('Customer has been created!');
         return redirect('customers');
     }
 
@@ -56,26 +53,26 @@ class CustomersController extends Controller
         $rules['phone_num'] = 'required|regex:/^\+?[^a-zA-Z]{5,}$/|unique:customers' . ',id,' . $customer->id;
 
         $this->validate($request, $rules);
-
         $customer->update($request->all());
 
-        $request->session()->flash('flash_notification.message', 'Customer has been updated!');
-        $request->session()->flash('flash_notification.level', 'success');
-
+        flash()->success('Customer has been updated!');
         return redirect(URL::route('customers.show', [$customer->id]));
     }
 
     // admin only
-    public function destroy()
+    public function destroy(Customer $customer, Request $request)
     {
-        
+        $customer->delete();
+
+        flash()->success('Customer has been deleted!');
+        return redirect('customers');
     }
 
     private function getRules()
     {
         return [
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
+            'first_name' => 'required|regex:/^[(a-zA-Z\s)]+$/u',
+            'last_name' => 'required|regex:/^[(a-zA-Z\s)]+$/u',
             'middle_name' => 'alpha',
             'email' => 'unique:customers',
             'phone_num' => 'required|unique:customers|regex:/^\+?[^a-zA-Z]{5,}$/'

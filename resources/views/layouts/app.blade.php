@@ -75,12 +75,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                {{-- flash --}}
-                @if (Session::has('flash_notification.message'))
-                    <div class="alert alert-{{ Session::get('flash_notification.level') }}">
-                        {{ Session::get('flash_notification.message') }}
-                    </div>
-                @endif
+                @include('flash::message')
 
                 @yield('content')
             </div>
