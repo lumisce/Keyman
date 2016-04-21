@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Customers</h1>
+	<h1>Customers <a href="{{ action('CustomersController@create')}}" class="btn btn-primary">Add</a></h1>
 	<hr>
 	@foreach ($customers as $customer)
 		<article>

@@ -18,4 +18,13 @@
 	{!! Form::model($customer, ['method' => 'PATCH', 'action' => ['CustomersController@update', $customer->id]]) !!}
 		@include('customers._form', ['submitButtonText' => 'Update Customer'])
 	{!! Form::close() !!}
+
+	@if (Auth::user()->isAdmin())
+		{!! Form::open(['method' => 'DELETE', 'action' => ['CustomersController@destroy', $customer->id]]) !!}
+			<fieldset class="form-group"> 
+				{!! Form::submit('Delete Customer', ['class' => 'btn btn-danger']) !!}
+			</fieldset>
+		{!! Form::close() !!}
+	@endif
+
 @stop
