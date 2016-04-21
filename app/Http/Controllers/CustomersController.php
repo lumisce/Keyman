@@ -73,7 +73,7 @@ class CustomersController extends Controller
         return [
             'first_name' => 'required|regex:/^[(a-zA-Z\s)]+$/u',
             'last_name' => 'required|regex:/^[(a-zA-Z\s)]+$/u',
-            'middle_name' => 'alpha',
+            'middle_name' => 'regex:/^[(a-zA-Z\s)]+$/u',
             'email' => 'unique:customers',
             'phone_num' => 'required|unique:customers|regex:/^\+?[^a-zA-Z]{5,}$/'
         ];
