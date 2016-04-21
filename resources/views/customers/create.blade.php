@@ -15,7 +15,7 @@
 	    </div>
 	@endif
 
-	{!! Form::model($article = new \App\Customer, ['url' => 'customers']) !!}
+	{!! Form::model($customer = new \App\Customer, ['url' => 'customers']) !!}
 		@include('customers._form', ['submitButtonText' => 'Add Customer'])
 	{!! Form::close() !!}
 
