@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Insurance extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'insurance_type_id',
     ];
 
     public function provider()
