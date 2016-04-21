@@ -15,6 +15,10 @@ class User extends Authenticatable
         'name', 'email', 'password', 'phone_num',
     ];
 
+    protected $boolean = [
+        'is_admin',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -26,7 +30,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->admin;
+        return $this->is_admin;
     }
 
     public function requests()
