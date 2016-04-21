@@ -6,7 +6,7 @@
         <fieldset class="form-group">
             
             {!! Form::label('location', 'Location:') !!}
-            {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+            {!! Form::text('location', null, ['class' => 'form-control']) !!}
         </fieldset>
         <fieldset class="form-group">
             

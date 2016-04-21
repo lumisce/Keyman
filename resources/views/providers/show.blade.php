@@ -4,6 +4,8 @@
 	<h1>{{ $provider->name }} <a href="{{ action('ProvidersController@edit', [$provider->id])}}" class="btn btn-primary">Edit</a></h1>
 	<hr>
 		<content>
+			{{ $provider->location }}
+		<br>
 			{{ $provider->email }}
 		<br>
 			{{ $provider->phone_num }}
