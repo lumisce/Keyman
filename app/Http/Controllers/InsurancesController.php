@@ -39,20 +39,30 @@ class InsurancesController extends Controller
     public function edit(Provider $provider, Insurance $insurance)
     {
         $types = InsuranceType::pluck('name', 'id');
-        $types->prepend(null);
         $types = $types->all();
-        // dd($insurance->insuranceType->name);
-        return view('insurances.edit', compact('insurance', 'types'));
+        $selected = $insurance->insuranceType->id;
+
+        return view('insurances.edit', compact('insurance', 'types', 'selected'));
     }
 
-    public function update(Provider $provider, Insurance $insurance)
+    public function update(Provider $provider, Insurance $insurance, Request $request)
     {
+        $this->validate($request, $this->getRules());
+        $input = $request['type'];
+        $request->merge(['insurance_type_id' => $input]);
+
+        $insurance->update($request->except(['type']));
+
+        flash()->success('Insurance Plan has been updated!');
         return redirect()->route('providers.show', [$provider]);
     }
 
     // admin only
     public function destroy(Provider $provider, Insurance $insurance)
     {
+        $insurance->delete();
+
+        flash()->success('Insurance Plan has been deleted!');
         return redirect()->route('providers.show', [$provider]);
     }
 

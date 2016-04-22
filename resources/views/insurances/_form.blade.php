@@ -6,7 +6,7 @@
 		<fieldset class="form-group">
 			
 			{!! Form::label('type', 'Type:') !!}
-			{!! Form::select('type', $types, null, ['class' => 'form-control', 'id' => 'type-select']) !!}
+			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'form-control', 'id' => 'type-select']) !!}
 		</fieldset>
 		<fieldset class="form-group"> 
 			
@@ -19,5 +19,6 @@
 					// placeholder: "*Select a Type*",
 	  		// 		allowClear: false
 				});
+				$('#type-select ')
 			</script>
 		@stop
