@@ -52,6 +52,9 @@
                     <li><a href="{{ url('/requests') }}">Requests</a></li>
                     <li><a href="{{ url('/customers') }}">Customers</a></li>
                     <li><a href="{{ url('/providers') }}">Providers</a></li>
+                    @if (Auth::user()->isAdmin())
+                    <li><a href="{{ url('/types') }}">Types</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

@@ -25,6 +25,8 @@ Route::resource('customers', 'CustomersController');
 Route::resource('requests', 'RequestsController', ['only' => ['index']]);
 Route::resource('providers.plans', 'InsurancesController', ['except' => ['index', 'show']]);
 Route::resource('providers', 'ProvidersController');
+Route::resource('types', 'TypesController', ['except' => ['show']]);
+
 
 
 // pagesController = home, about, browse
