@@ -10,6 +10,10 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://www.bahiajobs.com/css/fonts/gotham-rounded/stylesheet.css' rel='stylesheet' type='text/css'>
+    
+
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -17,9 +21,82 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
+
+    	@font-face {
+			font-family: 'Title';
+    		src: url('/resources/assets/fonts/BebasNeue.otf');
+			font-weight: normal;	
+			font-style: normal;
+		}
+
+		/*@font-face {
+			font-family: 'Headings';
+    		src:url('resources/assets/fonts/gotham-rounded-medium.otf');
+			font-weight: normal;
+			font-style: normal;
+		}*/
+
         body {
-            font-family: 'Lato';
+            font-family: 'Montserrat';
+            background-color: #fafafa; 
+            color: rgb(38,);
         }
+
+        h1, h2, h3{
+        	font-family: 'Title', Sans-Serif;
+        }
+
+        .navbar-default {
+    		background-color: #fafafa;
+    		border-color: rgb(233,130,51);
+    		border-width: 8px 0 0;
+    		
+    	}
+
+    	.navbar-default .navbar-nav>li>a {
+    		color: rgb(0,77,139);
+    		padding: 14px 15px 14px 15px;
+    		font-family:'GothamRoundedMedium';
+    	}
+
+    	.navbar-nav>li {
+    		border-width: 0 0 0 8px;
+    		border-style: solid;
+    		border-color: transparent;
+    	}
+    	
+
+    	.navbar-nav>li:hover {
+    		background-color: #f5f5f5;
+    		border-color: rgb(233,130,51);
+    	}
+
+
+    	@media (min-width: 768px) {
+
+    		.navbar-default .navbar-nav>li>a {
+    			padding-top: 40px;
+    		}
+
+    		.navbar-nav>li {
+    			border-width: 0 0 8px 0;
+    		}
+    	}
+
+    	.btn-primary {
+    		color: white;
+    		background-color: rgb(233,130,51);
+    		border: 0;
+		}
+
+		.btn {
+    		padding: 14px 64px;
+    		align: center;
+    	}
+
+    	.navbar-default .navbar-toggle {
+   			border: 0;
+		}
 
         .fa-btn {
             margin-right: 6px;
@@ -41,18 +118,19 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Keyman
+                    <h3><span style="color: rgb(233,130,51)">KEY</span>
+                    <span style="color: rgb(0,77,139)">MAN</span></h3>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/requests') }}">Requests</a></li>
-                    <li><a href="{{ url('/customers') }}">Customers</a></li>
-                    <li><a href="{{ url('/providers') }}">Providers</a></li>
-                    @if (Auth::user()->isAdmin())
+                    <li><a href="{{ url('/home') }}">HOME</a></li>
+                    <li><a href="{{ url('/requests') }}">REQUESTS</a></li>
+                    <li><a href="{{ url('/customers') }}">CUSTOMERS</a></li>
+                    <li><a href="{{ url('/providers') }}">PROVIDERS</a></li>
+                    @if (Auth::check() && Auth::user()->isAdmin())
                     <li><a href="{{ url('/types') }}">Types</a></li>
                     @endif
                 </ul>
@@ -81,7 +159,7 @@
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 @include('flash::message')
 
                 @yield('content')
