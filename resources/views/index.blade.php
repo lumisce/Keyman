@@ -1,37 +1,15 @@
 @extends('layouts.app')
 
-<style>
-	body {
-		border-top: 8px solid rgb(233,130,51);
-		text-align: center;
-	}
-
-	.navbar-default .navbar-brand {
-		display: none;
-	}
-
-	.container_top_padding {
-		padding-top: 60px;
-	}
-
-	.navbar-default {
-    	display: none;
-    }
-
-	@media (min-width: 768px){
-		.container_top_padding {
-			padding-top: 80px;
-		}
-	}
-	
-</style>
+<link rel="stylesheet" href="/assets/css/index.css">
 
 @section('content')
-		<div class="container_top_padding">
-			<h1>
-				<span style="color: rgb(233,130,51)">KEY<span style="color: rgb(0,77,139)">MAN</span></span><br />INSURANCE<br />SYSTEM
-			</h1>
-		</div>
+		<br />
+		<br />
+		<img src="/assets/images/KeymanLogo2.png" style="height:100px; width: 110px">
+		<h1><div class= "adjust">
+			<span style="color: rgb(233,130,51)">KEY<span style="color: rgb(0,77,139)">MAN</span></span><br />INSURANCE<br />SYSTEM
+		</div></h1>
+
 
 		<div class="container_top_padding">
 			<a href="{{ url('/login') }}"class=" btn btn-primary">LOG IN</a>
