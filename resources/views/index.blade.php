@@ -1,45 +1,36 @@
 @extends('layouts.app')
 
 <style>
-	p {
-		font-size: 48px;
-	}
-
 	body {
+		border-top: 8px solid rgb(233,130,51);
 		text-align: center;
-		/*border-top: 8px solid rgb(233,130,51);*/
 	}
 
 	.navbar-default .navbar-brand {
 		display: none;
 	}
-	.navbar-default .navbar-nav>li>a {
-		text-align: left;
-	}
+
 	.container_top_padding {
-		padding-top: 20px;
+		padding-top: 60px;
 	}
 
-/*	.navbar-default {
+	.navbar-default {
     	display: none;
     }
-*/
 
 	@media (min-width: 768px){
 		.container_top_padding {
 			padding-top: 80px;
 		}
 	}
-
-
+	
 </style>
 
 @section('content')
 		<div class="container_top_padding">
-			<p><span style="color: rgb(233,130,51)">KEY
-			</span> <span style="color: rgb(0,77,139)">MAN</span></p>
-			<p>INSURANCE</p>
-			<p> SYSTEM</p>
+			<h1>
+				<span style="color: rgb(233,130,51)">KEY<span style="color: rgb(0,77,139)">MAN</span></span><br />INSURANCE<br />SYSTEM
+			</h1>
 		</div>
 
 		<div class="container_top_padding">
