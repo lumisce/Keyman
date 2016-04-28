@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>{{ $provider->name }} <a href="{{ action('ProvidersController@edit', [$provider->id]) }}" class="btn btn-primary">Edit</a></h1>
+	<h1>{{ $provider->name }} 
+	@if (Auth::user()->isAdmin())
+		<a href="{{ action('ProvidersController@edit', [$provider->id]) }}" class="btn btn-primary">Edit</a>
+	@endif
+	</h1>
 	<hr>
 		<content>
 			{{ $provider->location }}
