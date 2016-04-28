@@ -24,7 +24,7 @@
 			</thead>
 			@foreach ($customer->insurances as $insurance)
 				<tr>
-					<td>{{ $insurance->name . " ". $insurance->id}}</td>
+					<td>{{ $insurance->name }}</td>
 					<td>{{ $insurance->provider->name }}</td>
 					<td>{{ $insurance->insuranceType->name }}</td>
 					<td>
