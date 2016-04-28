@@ -11,8 +11,8 @@
 			{{ $provider->phone_num }}
 		</content>
 	<br>
+	<h5>Insurance Plans: <a href="{{ action('InsurancesController@create', [$provider->id]) }}" class="btn btn-primary">Add</a> </h5>
 	@unless ($provider->insurances->isEmpty())
-		<h5>Insurances: <a href="{{ action('InsurancesController@create', [$provider->id]) }}" class="btn btn-primary">Add</a> </h5>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -30,12 +30,4 @@
 			@endforeach
 		</table>
 	@endunless
-@stop
-
-@section('footer')
-	<script>
-	    $("#deleteForm").on("submit", function(){
-	        return confirm("Do you want to delete this item?");
-	    });
-	</script>
 @stop
