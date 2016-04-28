@@ -14,6 +14,7 @@
 // Route::group(['middleware' => ['web']], function () {
 
 Route::auth();
+Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit']]);
 
 Route::get('/', ['middleware' => 'guest', 'uses' => 'PagesController@index']);
 Route::get('account', ['middleware' => 'auth', 'uses' => 'PagesController@account']);
