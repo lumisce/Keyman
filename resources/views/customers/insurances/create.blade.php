@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Add a New Insurance Plan</h1>
+	<h1>Add a New Insurance to Customer</h1>
 
 	<hr>
 
@@ -15,8 +15,8 @@
 	    </div>
 	@endif
 
-	{!! Form::model($insurance = new \App\Insurance, ['url' => 'providers/'. Request::segment(2) .'/plans']) !!}
-		@include('insurances._form', ['submitButtonText' => 'Add Insurance'])
+	{!! Form::open(['url' => 'customers/'. Request::segment(2) .'/insurances']) !!}
+		@include('customers.insurances._form', ['submitButtonText' => 'Add Insurance'])
 	{!! Form::close() !!}
 
 @stop
