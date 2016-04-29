@@ -18,7 +18,8 @@ class CustomerInsurancesController extends Controller
 
     public function create()
     {
-        $plans = Insurance::pluck('name', 'id');
+        $plans = \DB::table('insurances')->join('providers', 'providers.id', '=', 'insurances.provider_id')->select(\DB::raw("CONCAT(insurances.name, ' -- ', providers.name) AS full_name, insurances.id"))->pluck('full_name', 'id');
+        $plans = collect($plans);
         $plans->prepend(null);
         return view('customers.insurances.create', compact('plans'));
     }
