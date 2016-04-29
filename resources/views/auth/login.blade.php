@@ -16,9 +16,9 @@
                         </div>
                         <br />
                         <div class="blue form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label narrow">E-MAIL:</label>
+                            <label class="control-label narrow">E-MAIL:</label>
 
-                            <div class="col-md-6 narrow">
+                            <div class="narrow">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
@@ -30,8 +30,8 @@
                         </div>
 
                         <div class="blue form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label narrow">PASSWORD:</label>
-                            <div class="col-md-6 narrow">
+                            <label class="control-label narrow">PASSWORD:</label>
+                            <div class="narrow">
                                 <input type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))

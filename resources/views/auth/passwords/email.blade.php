@@ -1,14 +1,6 @@
 @extends('layouts.app')
-<style>
-@media (min-width: 992px) {
+<link rel="stylesheet" href="/assets/css/email.css">
 
-    .margin{
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-}
-
-</style>
 <!-- Main Content -->
 @section('content')
 <div class="container">
