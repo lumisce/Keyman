@@ -27,28 +27,49 @@
 					<td>{{ $insurance->name }}</td>
 					<td>{{ $insurance->provider->name }}</td>
 					<td>{{ $insurance->insuranceType->name }}</td>
-					<td>
-						@if (Auth::user()->isAdmin())
+					@if (Auth::user()->isAdmin())
+						<td>
 							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'id' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
 									{!! Form::submit('Remove Insurance', ['class' => 'btn btn-danger']) !!}
 								</fieldset>
 							{!! Form::close() !!}
+						</td>
+					@endif
+				</tr>
+			@endforeach
+		</table>
+	@endunless
+
+	<h5>Requests: {{ $customer->total_requests }} <a href="{{ action('RequestsController@create', [$customer->id])}}" class="btn btn-primary">Add</a></h5>
+	@unless ($customer->requests->isEmpty())
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Insurance</th>
+					<th>Provider</th>
+					<th>Type</th>
+					<th>Status</th>
+					@if (Auth::user()->isAdmin())
+					<th>Action</th>
+					@endif
+				</tr>
+			</thead>
+			@foreach ($customer->requests as $request)
+				<tr>
+					<td>{{ $request->insurance->name }}</td>
+					<td>{{ $request->insurance->provider }}</td>
+					<td>{{ $request->type->name }}</td>
+					<td>{{ $request->status }}</td>
+					<td>
+						@if (Auth::user()->isAdmin())
+							<a href="{{ action('RequestsController@edit', [$customer->id, $request->id]) }}" class="btn btn-primary">Edit</a>
 						@endif
 					</td>
 				</tr>
 			@endforeach
 		</table>
 	@endunless
-
-	<h5>Requests: {{ $customer->total_requests }}</h5>
-	<ul>
-		@foreach ($customer->requests as $request)
-			<li>{{ $request->insurance }}</li>
-			<li>{{ $request->type }}</li>
-			<li>{{ $request->status }}</li>
-		@endforeach
-	</ul>
 @stop
 
 @section('footer')
