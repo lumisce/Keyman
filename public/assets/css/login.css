@@ -1,0 +1,66 @@
+body {
+    padding-top: 5%;
+}
+
+.form-horizontal .control-label {
+    padding-top: 20px;
+    text-align: left;
+    font-family: 'Nav';
+}
+
+.navbar-default {
+    display: none;
+}
+
+a.btn.btn-link {
+    font-size: 12px;
+    color: rgb(38,38,38);
+    padding-left: 0;
+    padding-top: 20px;
+}
+
+.form-group {
+    padding: 2% 5% 2% 5%;
+}
+
+.btn.btn-primary {
+    width: 50%;
+    margin-left: 25%;
+    min-width: 96px;
+    text-align: center;
+}
+
+.checkbox {
+    margin-left: 38.5%;
+}
+
+@media (min-width: 992px) {
+    .form-group {
+        padding-top: 2%;
+        margin-bottom: 0;
+    }
+    .btn.btn-primary {
+        width: 100%;
+        margin: 0;
+    }
+    .checkbox {
+        margin-left: 25%;
+    }
+
+}
+
+@media (min-width: 764px) {
+
+    a.btn.btn-link {
+        text-align: center;
+        margin-bottom: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+}
+@media (max-width: 480px) {
+    .checkbox {
+        margin-left: 0%;
+    }   
+}
