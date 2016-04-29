@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Request;
+use App\RequestType;
 
 class RequestsController extends Controller
 {
@@ -15,7 +17,11 @@ class RequestsController extends Controller
 
     public function create()
     {
-        return view('requests.create');
+        $plans = \DB::table('insurances')->join('providers', 'providers.id', '=', 'insurances.provider_id')->select(\DB::raw("CONCAT(insurances.name, ' -- ', providers.name) AS full_name, insurances.id"))->pluck('full_name', 'id');
+        $plans = collect($plans);
+        $plans->prepend(null);
+        $types = RequestType::all();
+        return view('requests.create', compact('types', 'plans'));
     }
 
     public function store()
