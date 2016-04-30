@@ -12,23 +12,29 @@
 */
 
 // Route::group(['middleware' => ['web']], function () {
+Route::get('/', ['middleware' => 'guest', 'uses' => 'PagesController@index']);
 
 Route::auth();
-Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit']]);
 
-Route::get('/', ['middleware' => 'guest', 'uses' => 'PagesController@index']);
-Route::get('account', ['middleware' => 'auth', 'uses' => 'PagesController@account']);
-Route::get('about', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
-Route::get('browse', ['middleware' => 'auth', 'uses' => 'PagesController@browse']);
+Route::group(['middleware' => 'auth'], function () {
+    
+    Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit']]);
+});
 
-Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
-Route::resource('customers.insurances', 'CustomerInsurancesController', ['only' => ['create', 'store', 'destroy']]);
-Route::resource('customers', 'CustomersController');
-Route::resource('requests', 'RequestsController', ['only' => ['index']]);
-Route::resource('providers.plans', 'InsurancesController', ['except' => ['index', 'show']]);
-Route::resource('providers', 'ProvidersController');
-Route::resource('types', 'TypesController', ['except' => ['show']]);
+Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('account', 'PagesController@account');
+    Route::get('about', 'PagesController@about');
+    Route::get('browse', 'PagesController@browse');
+
+    Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
+    Route::resource('customers.insurances', 'CustomerInsurancesController', ['only' => ['create', 'store', 'destroy']]);
+    Route::resource('customers', 'CustomersController');
+    Route::resource('requests', 'RequestsController', ['only' => ['index']]);
+    Route::resource('providers.plans', 'InsurancesController', ['except' => ['index', 'show']]);
+    Route::resource('providers', 'ProvidersController');
+    Route::resource('types', 'TypesController', ['except' => ['show']]);
+});
 
 
 // pagesController = home, about, browse
