@@ -16,7 +16,8 @@ class RequestsController extends Controller
 {
     public function index()
     {
-        return view('requests.index');
+        $requests = KeymanRequest::all();
+        return view('requests.index', compact('requests'));
     }
 
     public function create(Request $request)
