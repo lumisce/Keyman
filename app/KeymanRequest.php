@@ -4,13 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Request extends Model
+class KeymanRequest extends Model
 {
     protected $fillable = [
         'insurance_id',
         'request_type_id',
         'status',
     ];
+
+    protected $table = 'requests';
 
     protected $dates = ['turnaround_date'];
 
