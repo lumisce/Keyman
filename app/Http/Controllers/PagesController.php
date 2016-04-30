@@ -26,9 +26,9 @@ class PagesController extends Controller
     {
         $customers = Customer::select(DB::raw("CONCAT(first_name, ' ', last_name, ', ', middle_name) AS full_name, id"))
             ->pluck('full_name', 'id');
-        $customers->prepend(null);
+        $customers->prepend(null, 0);
         $providers = Provider::pluck('name', 'id');
-        $providers->prepend(null);
+        $providers->prepend(null, 0);
         return view('browse', compact('customers', 'providers'));
     }
 
