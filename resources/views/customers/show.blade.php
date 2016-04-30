@@ -46,9 +46,10 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					<th>Date Received</th>
 					<th>Insurance</th>
-					<th>Provider</th>
 					<th>Type</th>
+					<th>Turnaround Date</th>
 					<th>Status</th>
 					@if (Auth::user()->isAdmin())
 					<th>Action</th>
@@ -57,13 +58,14 @@
 			</thead>
 			@foreach ($customer->requests as $krequest)
 				<tr>
+					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					<td>{{ $krequest->insurance->name }}</td>
-					<td>{{ $krequest->insurance->provider }}</td>
 					<td>{{ $krequest->type->name }}</td>
+					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
 					<td>{{ $krequest->status }}</td>
 					<td>
 						@if (Auth::user()->isAdmin())
-							<a href="{{ action('RequestsController@edit', [$customer->id, $request->id]) }}" class="btn btn-primary">Edit</a>
+							<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
 						@endif
 					</td>
 				</tr>
