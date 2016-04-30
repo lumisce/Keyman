@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class KeymanRequest extends Model
 {
     protected $fillable = [
+        'customer_id',
         'insurance_id',
         'request_type_id',
         'status',
