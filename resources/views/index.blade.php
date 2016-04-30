@@ -10,7 +10,6 @@
 			<span style="color: rgb(233,130,51)">KEY<span style="color: rgb(0,77,139)">MAN</span></span><br />INSURANCE<br />SYSTEM
 		</div></h1>
 
-
 		<div class="container_top_padding">
 			<a href="{{ url('/login') }}"class=" btn btn-primary">LOG IN</a>
 			<br />
