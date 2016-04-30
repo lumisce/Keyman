@@ -7,7 +7,7 @@
 
 	@include('errors._list')
 
-	{!! Form::model($krequest = new \App\KeymanRequest, [route('customers.requests.store', $customer)]) !!}
+	{!! Form::model($krequest = new \App\KeymanRequest, ['action' => ['RequestsController@store', $customer->id]]) !!}
 		@include('customers.requests._form', ['submitButtonText' => 'Add Request'])
 	{!! Form::close() !!}
 
