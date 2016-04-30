@@ -25,4 +25,9 @@ class Insurance extends Model
         return $this->belongsToMany('App\Customer', 'customer_insurances')
             ->withTimestamps();
     }
+    
+    public function requests()
+    {
+        return $this->hasMany('App\KeymanRequest');
+    }
 }

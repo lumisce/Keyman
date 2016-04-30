@@ -21,7 +21,7 @@ class CustomerInsurancesController extends Controller
         $customer = Customer::findOrFail($request->segment(2));
         $plans = \DB::table('insurances')->join('providers', 'providers.id', '=', 'insurances.provider_id')->select(\DB::raw("CONCAT(insurances.name, ' -- ', providers.name) AS full_name, insurances.id"))->pluck('full_name', 'id');
         $plans = collect($plans);
-        $plans->prepend(null);
+        $plans->prepend(null, 0);
         return view('customers.insurances.create', compact('plans', 'customer'));
     }
 

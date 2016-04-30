@@ -44,7 +44,8 @@
                     	<li><a href="{{ url('/providers') }}">PROVIDERS</a></li>
                     @endif
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <li><a href="{{ url('/types') }}">TYPES</a></li>
+                        <li><a href="{{ url('/types') }}">INS TYPES</a></li>
+                        <li><a href="{{ url('/request_types') }}">REQ TYPES</a></li>
                     	<li><a href="{{ url('/users') }}">USERS</a></li>
                     @endif
                 </ul>

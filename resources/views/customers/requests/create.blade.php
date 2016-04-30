@@ -7,8 +7,8 @@
 
 	@include('errors._list')
 
-	{!! Form::model($krequest = new \App\KeymanRequest, ['action' => 'RequestsController@store', $customer->id]) !!}
-		@include('customers._form', ['submitButtonText' => 'Add Request'])
+	{!! Form::model($krequest = new \App\KeymanRequest, ['action' => ['RequestsController@store', $customer->id]]) !!}
+		@include('customers.requests._form', ['submitButtonText' => 'Add Request'])
 	{!! Form::close() !!}
 
 @stop

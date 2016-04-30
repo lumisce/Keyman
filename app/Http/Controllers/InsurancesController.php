@@ -21,7 +21,7 @@ class InsurancesController extends Controller
     {
         $provider = Provider::findOrFail($request->segment(2));
         $types = InsuranceType::pluck('name', 'id');
-        $types->prepend(null);
+        $types->prepend(null, 0);
         return view('insurances.create', compact('types', 'provider'));
     }
 

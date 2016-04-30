@@ -35,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('types', 'App\InsuranceType');
         $router->model('users', 'App\User');
         $router->model('requests', 'App\KeymanRequest');
+        $router->model('request_types', 'App\RequestType');
     }
 
     /**
