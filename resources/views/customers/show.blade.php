@@ -51,9 +51,7 @@
 					<th>Type</th>
 					<th>Turnaround Date</th>
 					<th>Status</th>
-					@if (Auth::user()->isAdmin())
 					<th>Action</th>
-					@endif
 				</tr>
 			</thead>
 			@foreach ($customer->requests as $krequest)
@@ -64,9 +62,7 @@
 					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
 					<td>{{ $krequest->status }}</td>
 					<td>
-						@if (Auth::user()->isAdmin())
-							<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
-						@endif
+						<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
 					</td>
 				</tr>
 			@endforeach
