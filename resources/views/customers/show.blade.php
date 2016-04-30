@@ -55,12 +55,12 @@
 					@endif
 				</tr>
 			</thead>
-			@foreach ($customer->requests as $request)
+			@foreach ($customer->requests as $krequest)
 				<tr>
-					<td>{{ $request->insurance->name }}</td>
-					<td>{{ $request->insurance->provider }}</td>
-					<td>{{ $request->type->name }}</td>
-					<td>{{ $request->status }}</td>
+					<td>{{ $krequest->insurance->name }}</td>
+					<td>{{ $krequest->insurance->provider }}</td>
+					<td>{{ $krequest->type->name }}</td>
+					<td>{{ $krequest->status }}</td>
 					<td>
 						@if (Auth::user()->isAdmin())
 							<a href="{{ action('RequestsController@edit', [$customer->id, $request->id]) }}" class="btn btn-primary">Edit</a>
