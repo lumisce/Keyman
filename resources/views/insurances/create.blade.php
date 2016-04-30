@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Add a New Insurance Plan</h1>
+	<h1>Add a New Insurance Plan to {{ $provider->name }}</h1>
 
 	<hr>
 

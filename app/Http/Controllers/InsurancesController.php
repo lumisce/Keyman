@@ -17,11 +17,12 @@ class InsurancesController extends Controller
         $this->middleware('admin', ['only' => ['destroy']]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $provider = Provider::findOrFail($request->segment(2));
         $types = InsuranceType::pluck('name', 'id');
         $types->prepend(null);
-        return view('insurances.create', compact('types'));
+        return view('insurances.create', compact('types', 'provider'));
     }
 
     public function store(Request $request)
