@@ -60,9 +60,16 @@ class RequestsController extends Controller
         return redirect()->route('customers.show', [$customer]);
     }
 
-    public function edit()
+    public function edit(Customer $customer, KeymanRequest $krequest)
     {
-        return view('customers.requests.edit');
+        $receiver = $krequest->insurance->provider->email;
+        $subject = $krequest->type->name;
+        $content = 'Customer Name: ' . $customer->first_name . ' ' . $customer->last_name
+            . ', Insurance: ' . $krequest->insurance->name;
+        $status = ['ONGOING', 'PENDING'];
+        $status = array_combine($status, $status);
+
+        return view('customers.requests.edit', compact('customer', 'krequest', 'receiver', 'subject', 'content', 'status'));
     }
 
     public function update(Request $request, Customer $customer, KeymanRequest $krequest)

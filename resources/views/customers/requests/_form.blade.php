@@ -11,7 +11,7 @@
 		<fieldset class="form-group"> 
 			{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 		</fieldset>
-
+		
 		@section('footer')
 			<script>
 				$('#type-select').select2();
