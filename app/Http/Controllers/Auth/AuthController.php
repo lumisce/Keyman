@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/browse';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new authentication controller instance.
@@ -37,7 +38,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit']]);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register']]);
+        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register']]);
     }
 
     /**
@@ -75,6 +77,21 @@ class AuthController extends Controller
     public function showRegistrationForm()
     {
         return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        User::create($request->all());
+
+        return redirect('users');
     }
 
     public function index()
