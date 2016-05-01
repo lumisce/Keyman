@@ -18,7 +18,8 @@ Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit']]);
+    Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit', 'update', 'show']]);
+    Route::post('users/{users}/admin', 'Auth\AuthController@setAdmin');
 
     Route::get('account', 'PagesController@account');
     Route::get('about', 'PagesController@about');

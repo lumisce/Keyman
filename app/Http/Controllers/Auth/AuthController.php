@@ -38,8 +38,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register']]);
-        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register']]);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register', 'update', 'show', 'setAdmin']]);
+        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index', 'show']]);
     }
 
     /**
@@ -91,6 +91,7 @@ class AuthController extends Controller
 
         User::create($request->all());
 
+        flash()->success('User has been created!');
         return redirect('users');
     }
 
@@ -104,5 +105,20 @@ class AuthController extends Controller
     {
         $users = User::all();
         return view('auth.index', compact('users'));
+    }
+
+    public function setAdmin(User $user)
+    {
+        $s = "set";
+        if ($user->isAdmin()) {
+            $user->is_admin = 0;
+            $s = "unset";
+        } else {
+            $user->is_admin = 1;
+        }
+        $user->save();
+
+        flash()->success('User has been '. $s .' as admin!');
+        return redirect('users');
     }
 }

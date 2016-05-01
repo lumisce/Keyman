@@ -23,8 +23,14 @@
 				<td>{{ $user->name }}</td>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->phone_num }}</td>
-				<td>{{ $user->isAdmin() ? 'Yes' : 'No'}}</td>
-				<td><a href="{{ action('Auth\AuthController@edit', [$user->id]) }}" class="btn btn-primary">Edit</a></td>
+				<td>{{ $user->isAdmin() ? 'Yes' : 'No' }}</td>
+				<td>
+				{!! Form::open(['action' => ['Auth\AuthController@setAdmin', $user->id], 'class' => '']) !!}
+					<fieldset class="form-group"> 
+						{!! Form::submit($user->isAdmin() ? 'Unset Admin' : 'Set Admin', ['class' => 'btn btn-primary']) !!}
+					</fieldset>
+				{!! Form::close() !!}
+				</td>
 			</tr>
 		@endforeach
 	</table>
