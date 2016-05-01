@@ -52,6 +52,9 @@
 					<th>Turnaround Date</th>
 					<th>Status</th>
 					<th>Action</th>
+					@if (Auth::user()->isAdmin())
+					<th></th>
+					@endif
 				</tr>
 			</thead>
 			@foreach ($customer->requests as $krequest)
@@ -64,6 +67,15 @@
 					<td>
 						<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
 					</td>
+					@if (Auth::user()->isAdmin())
+						<td>
+							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $customer->id, $krequest->id], 'id' => 'deleteForm']) !!}
+								<fieldset class="form-group"> 
+									{!! Form::submit('Delete Request', ['class' => 'btn btn-danger']) !!}
+								</fieldset>
+							{!! Form::close() !!}
+						</td>
+					@endif
 				</tr>
 			@endforeach
 		</table>

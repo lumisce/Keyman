@@ -65,15 +65,18 @@ class RequestsController extends Controller
         return view('customers.requests.edit');
     }
 
-    public function update()
+    public function update(Request $request, Customer $customer, KeymanRequest $krequest)
     {
         
     }
 
     // admin only
-    public function destroy()
+    public function destroy(Request $request, Customer $customer, KeymanRequest $krequest)
     {
-        
+        $krequest->users()->detach();
+        $krequest->delete();
+
+        return redirect()->back();
     }
 
     private function getRules()
