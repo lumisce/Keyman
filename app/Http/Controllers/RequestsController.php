@@ -66,16 +66,14 @@ class RequestsController extends Controller
         $subject = $krequest->type->name;
         $content = 'Customer Name: ' . $customer->first_name . ' ' . $customer->last_name
             . ', Insurance: ' . $krequest->insurance->name;
-        $status = ['ONGOING', 'PENDING'];
-        $status = array_combine($status, $status);
 
-        return view('customers.requests.edit', compact('customer', 'krequest', 'receiver', 'subject', 'content', 'status'));
+        return view('customers.requests.edit', compact('customer', 'krequest', 'receiver', 'subject', 'content'));
     }
 
     public function update(Request $request, Customer $customer, KeymanRequest $krequest)
     {
-        $krequest->users()->sync([\Auth::user()->id => ['progress' => 'emailed']]);
-        $krequest->status = $request['status'];
+        $krequest->users()->sync([\Auth::user()->id => ['progress' => 'sent request']]);
+        $krequest->status = 'PENDING';
         $krequest->save();
 
         flash()->success('Request has been updated!');
@@ -115,6 +113,11 @@ class RequestsController extends Controller
 
         flash()->success('Request has been completed!');
         return redirect()->back();
+    }
+
+    public function email(Request $request, Customer $customer, KeymanRequest $krequest)
+    {
+        return redirect()->back()->back();
     }
 
     private function getRules()

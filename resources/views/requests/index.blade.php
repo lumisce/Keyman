@@ -48,7 +48,7 @@
 						@endif
 					</td>
 					<td>
-						@if ($krequest->status == 'PENDING')
+						@if ($krequest->status == 'PENDING' && Auth::id() == $krequest->users()->first()->id)
 						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@complete', $krequest->customer->id, $krequest->id], 'class' => 'completeForm']) !!}
 							<fieldset class="form-group"> 
 								{!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
