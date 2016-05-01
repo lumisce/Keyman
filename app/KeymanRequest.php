@@ -35,6 +35,9 @@ class KeymanRequest extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'request_users', 'request_id', 'user_id')
+            ->withPivot('progress')
+            ->withTimestamps()
+            ->orderBy('pivot_created_at', 'desc');
     }
 }

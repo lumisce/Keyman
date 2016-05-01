@@ -13,8 +13,9 @@
 					<th>Insurance</th>
 					<th>Request</th>
 					<th>Turnaround Date</th>
-					<th>Status</th>
 					<th>Consultant</th>
+					<th>Status</th>
+					<th>Progress</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -26,8 +27,9 @@
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type->name }}</td>
 					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
+					<td>{{ $krequest->users()->first()->name }}</td>
 					<td>{{ $krequest->status }}</td>
-					<td></td>
+					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
 					<td><a href="{{ action('RequestsController@edit', [$krequest->customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a></td>
 				</tr>
 			@endforeach

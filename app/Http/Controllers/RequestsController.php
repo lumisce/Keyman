@@ -53,6 +53,8 @@ class RequestsController extends Controller
         $krequest->insurance()->associate($insurance);
         $krequest->type()->associate($type);
         // dd($krequest);
+        $krequest->users()->attach(\Auth::user()->id, ['progress' => 'created']);
+
 
         flash()->success('Request has been added!');
         return redirect()->route('customers.show', [$customer]);
