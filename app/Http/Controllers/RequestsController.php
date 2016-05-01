@@ -117,7 +117,7 @@ class RequestsController extends Controller
 
     public function email(Request $request, Customer $customer, KeymanRequest $krequest)
     {
-        return redirect()->back()->back();
+        return redirect()->back();
     }
 
     private function getRules()
