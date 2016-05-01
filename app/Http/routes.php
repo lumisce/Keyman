@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('browse', 'PagesController@browse');
 
     Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
+    Route::match(['put', 'patch'], 'customers/{customers}/requests/{requests}/complete', 'RequestsController@complete');
     Route::resource('customers.insurances', 'CustomerInsurancesController', ['only' => ['create', 'store', 'destroy']]);
     Route::resource('customers', 'CustomersController');
     Route::resource('requests', 'RequestsController', ['only' => ['index']]);

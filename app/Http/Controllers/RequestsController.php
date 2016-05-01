@@ -67,7 +67,12 @@ class RequestsController extends Controller
 
     public function update(Request $request, Customer $customer, KeymanRequest $krequest)
     {
-        
+        $krequest->users()->sync([\Auth::user()->id => ['progress' => 'emailed']]);
+        $krequest->status = $request['status'];
+        $krequest->save();
+
+        flash()->success('Request has been updated!');
+        return redirect()->back();
     }
 
     // admin only
@@ -75,7 +80,33 @@ class RequestsController extends Controller
     {
         $krequest->users()->detach();
         $krequest->delete();
+        $customer->total_requests = $customer->requests->count();
+        $customer->save();
 
+        flash()->success('Request has been deleted!');
+        return redirect()->back();
+    }
+
+    public function complete(Request $request, Customer $customer, KeymanRequest $krequest)
+    {
+        $tdate = $krequest->turnaround_date;
+
+        if (Carbon::now()->startOfDay()->gt($tdate)) {
+            $completed = ' (overdue)';
+
+        } elseif (Carbon::now()->startOfDay()->lt($tdate)) {
+            $completed = ' (early)';
+
+        } else {
+            $completed = ' (on time)';
+        }
+
+
+        $krequest->users()->sync([\Auth::user()->id => ['progress' => date('Y-m-d'). $completed]]);
+        $krequest->status = 'COMPLETED';
+        $krequest->save();
+
+        flash()->success('Request has been completed!');
         return redirect()->back();
     }
 
