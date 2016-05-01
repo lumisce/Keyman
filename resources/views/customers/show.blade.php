@@ -29,7 +29,7 @@
 					<td>{{ $insurance->insuranceType->name }}</td>
 					@if (Auth::user()->isAdmin())
 						<td>
-							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'id' => 'deleteForm']) !!}
+							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'class' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
 									{!! Form::submit('Remove Insurance', ['class' => 'btn btn-danger']) !!}
 								</fieldset>
@@ -69,7 +69,7 @@
 					</td>
 					@if (Auth::user()->isAdmin())
 						<td>
-							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $customer->id, $krequest->id], 'id' => 'deleteForm']) !!}
+							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $customer->id, $krequest->id], 'class' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
 									{!! Form::submit('Delete Request', ['class' => 'btn btn-danger']) !!}
 								</fieldset>
@@ -84,7 +84,7 @@
 
 @section('footer')
 	<script>
-	    $("#deleteForm").on("submit", function(){
+	    $(".deleteForm").on("submit", function(){
 	        return confirm("Do you want to delete this item?");
 	    });
 	</script>
