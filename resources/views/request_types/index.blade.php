@@ -15,7 +15,7 @@
 		@foreach ($types as $type)
 			<tr>
 				<td>{{ $type->name }}</td>
-				<td>{{ $type->ideal_turnaround }} days</td>
+				<td>{{ $type->ideal_turnaround . ' day' }}{{ $type->ideal_turnaround == 1 ? '' : 's'}}</td>
 				<td><a href="{{ action('RequestTypesController@edit', [$type->id]) }}" class="btn btn-primary">Edit</a></td>
 			</tr>
 		@endforeach
