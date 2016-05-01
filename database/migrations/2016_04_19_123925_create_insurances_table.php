@@ -23,6 +23,7 @@ class CreateInsurancesTable extends Migration
             $table->foreign('provider_id')
                 ->references('id')
                 ->on('providers');
+            $table->decimal('payment', 15, 2);
             $table->timestamps();
         });
     }
