@@ -19,7 +19,7 @@ class TypesController extends Controller
     // shows list of insurance types
     public function index()
     {
-        $types = InsuranceType::all();
+        $types = InsuranceType::orderBy('name')->get();
 
         return view('types.index', compact('types'));
     }

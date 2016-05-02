@@ -19,7 +19,7 @@ class RequestTypesController extends Controller
     // shows list of request types
     public function index()
     {
-        $types = RequestType::all();
+        $types = RequestType::orderBy('name')->get();
 
         return view('request_types.index', compact('types'));
     }
