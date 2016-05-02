@@ -2,17 +2,185 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Date Received</th>
+					<th>
+					@if ($sortby == 'id' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Date Received',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'id',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Date Received',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'id',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+					</th>
 					@if ($showCustomer)
-					<th>Customer</th>
+						<th>
+						@if ($sortby == 'customer' && $order == 'asc') {!!
+	                        link_to_action(
+	                            $sortMethod,
+	                            'Customer',
+	                            [
+	                                isset($attach) ? $attach : null,
+	                                'sortby' => 'customer',
+	                                'order' => 'desc',
+	                            ]
+	                        )
+	                    !!}
+	                    @else {!!
+	                        link_to_action(
+	                            $sortMethod,
+	                            'Customer',
+	                            [
+	                                isset($attach) ? $attach : null,
+	                                'sortby' => 'customer',
+	                                'order' => 'asc',
+	                            ]
+	                        )
+	                    !!}
+	                	@endif
+		                </th>
 					@endif
-					<th>Insurance</th>
-					<th>Request</th>
-					<th>Turnaround Date</th>
+					<th>
+					@if ($sortby == 'insurance' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Insurance',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'insurance',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Insurance',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'insurance',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+					</th>
+					<th>
+					@if ($sortby == 'type' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Request',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'type',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Request',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'type',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+					</th>
+					<th>
+					@if ($sortby == 'turnaround' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Ideal Turnaround',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'turnaround',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Ideal Turnaround',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'turnaround',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+					</th>
 					@if ($showUser)
-					<th>Consultant</th>
+					<th>
+						@if ($sortby == 'consultant' && $order == 'asc') {!!
+	                        link_to_action(
+	                            $sortMethod,
+	                            'Consultant',
+	                            [
+	                           		isset($attach) ? $attach : null,
+	                                'sortby' => 'consultant',
+	                                'order' => 'desc',
+	                            ]
+	                        )
+	                    !!}
+	                    @else {!!
+	                        link_to_action(
+	                            $sortMethod,
+	                            'Consultant',
+	                            [
+	                           		isset($attach) ? $attach : null,
+	                                'sortby' => 'consultant',
+	                                'order' => 'asc',
+	                            ]
+	                        )
+	                    !!}
+	                	@endif
+					</th>
 					@endif
-					<th>Status</th>
+					<th>
+					@if ($sortby == 'status' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Status',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'status',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Status',
+                            [
+	                           	isset($attach) ? $attach : null,
+                                'sortby' => 'status',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+                	</th>
 					<th>Progress</th>
 					<th>Action</th>
 					<th></th>

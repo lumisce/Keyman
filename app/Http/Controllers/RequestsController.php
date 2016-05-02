@@ -14,13 +14,18 @@ use Carbon\Carbon;
 
 class RequestsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $requests = KeymanRequest::all();
+        $out = $this->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'RequestsController@index';
+        
+        $requests = $out['requests'];
         $showUser = true;
         $showCustomer = true;
 
-        return view('requests.index', compact('requests', 'showUser', 'showCustomer'));
+        return view('requests.index', compact('requests', 'showUser', 'showCustomer', 'sortby', 'order', 'sortMethod'));
     }
 
     public function create(Request $request)
@@ -55,7 +60,6 @@ class RequestsController extends Controller
         $krequest->customer()->associate($customer);
         $krequest->insurance()->associate($insurance);
         $krequest->type()->associate($type);
-        // dd($krequest);
         $krequest->users()->attach(\Auth::user()->id, ['progress' => 'created']);
 
 
@@ -115,5 +119,38 @@ class RequestsController extends Controller
             'insurance_id' => 'required|not_in:0',
             'request_type_id' => 'required|not_in:0'
         ];
+    }
+
+    public function sort(Request $request)
+    {
+        // sortby = id, customer, insurance, type, turnaround, consultant, status
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            if ($sortby == 'customer') {
+                $requests = KeymanRequest::orderByCustomer($order)->get();
+            } elseif ($sortby == 'insurance') {
+                $requests = KeymanRequest::orderByInsurance($order)->get();
+            } elseif ($sortby == 'type') {
+                $requests = KeymanRequest::orderByType($order)->get();
+            } elseif ($sortby == 'consultant') {
+                $requests = KeymanRequest::orderByConsultant($order)->get();
+            } elseif ($sortby == 'status') {
+                $requests = KeymanRequest::orderByStatus($order)->get();
+            } elseif ($sortby == 'turnaround') {
+                $requests = KeymanRequest::orderByTurnaround($order)->get();
+            } else {
+                $requests = KeymanRequest::orderBy($sortby, $order)->get();
+            }
+
+        } else {
+            $sortby = '';
+            $requests = KeymanRequest::all();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'requests' => $requests];
     }
 }

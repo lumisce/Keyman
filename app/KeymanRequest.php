@@ -40,4 +40,51 @@ class KeymanRequest extends Model
             ->withTimestamps()
             ->orderBy('pivot_created_at', 'desc');
     }
+
+    // sortby = customer, insurance, type, turnaround, consultant, status
+
+    public function scopeOrderByCustomer($query, $order = 'asc')
+    {
+        $query->join('customers', 'customers.id', '=', 'requests.customer_id')
+            ->orderBy('customers.last_name', $order)
+            ->select('requests.*');
+    }
+
+    public function scopeOrderByInsurance($query, $order = 'asc')
+    {
+        $query->join('insurances', 'insurances.id', '=', 'requests.insurance_id')
+            ->orderBy('insurances.name', $order)
+            ->select('requests.*');
+    }
+
+    public function scopeOrderByType($query, $order = 'asc')
+    {
+        $query->join('request_types', 'request_types.id', '=', 'requests.request_type_id')
+            ->orderBy('request_types.name', $order)
+            ->select('requests.*');
+    }
+
+    public function scopeOrderByConsultant($query, $order = 'asc')
+    {
+        $query->join('request_users', 'request_users.request_id', '=', 'requests.id')
+            ->join('users', 'request_users.user_id', '=', 'users.id')
+            ->orderBy('users.name', $order)
+            ->select('requests.*');
+    }
+
+    public function scopeOrderByStatus($query, $order = 'asc')
+    {
+        $query
+            ->orderBy('requests.status', $order)
+            ->orderBy('requests.turnaround_date', 'asc')
+            ->select('requests.*');
+    }
+
+    public function scopeOrderByTurnaround($query, $order = 'asc')
+    {
+        $query
+            ->orderBy('requests.turnaround_date', $order)
+            ->orderBy('requests.status', $order)
+            ->select('requests.*');
+    }
 }
