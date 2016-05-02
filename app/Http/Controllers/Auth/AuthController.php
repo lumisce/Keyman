@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -42,20 +41,15 @@ class AuthController extends Controller
         $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index', 'show']]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    // validation rules
+    private function getRules()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
+        return [
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'phone_num' => 'numeric|unique:users',
+            'phone_num' => 'required|numeric|unique:users',
             'password' => 'required|min:6|confirmed',
-        ]);
+        ];
     }
 
     /**
@@ -81,11 +75,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = $this->validator($request->all());
-
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
+        $rules = $this->getRules();
+        $this->validate($request, $rules);
 
         User::create($request->all());
 
@@ -102,6 +93,20 @@ class AuthController extends Controller
     public function edit(User $user)
     {
         return view('auth.edit', compact('user'));
+    }
+    
+    public function update(Request $request)
+    {
+        $rules = $this->getRules();
+        $rules['name'] = 'required|max:255|unique:users' . ',id,' . \Auth::id();
+        $rules['email'] = 'required|email|max:255|unique:users' . ',id,' . \Auth::id();
+        $rules['phone_num'] = 'required|numeric|unique:users' . ',id,' . \Auth::id();
+
+        $this->validate($request, $rules);
+        \Auth::user()->update($request->all());
+
+        flash()->success('Account has been updated!');
+        return redirect('account');
     }
 
     public function show(User $user)
