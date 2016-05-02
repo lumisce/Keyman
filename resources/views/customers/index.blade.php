@@ -8,10 +8,76 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Email</th>
+					<th>
+					@if ($sortby == 'name' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Name',
+                            [
+                                'sortby' => 'name',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Name',
+                            [
+                                'sortby' => 'name',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+					</th>
+					<th>
+					@if ($sortby == 'email' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Email',
+                            [
+                                'sortby' => 'email',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Email',
+                            [
+                                'sortby' => 'email',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+                	</th>
 					<th>Phone</th>
-					<th>Requests</th>
+					<th>
+					@if ($sortby == 'requests' && $order == 'asc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Requests',
+                            [
+                                'sortby' => 'requests',
+                                'order' => 'desc',
+                            ]
+                        )
+                    !!}
+                    @else {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Requests',
+                            [
+                                'sortby' => 'requests',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                	@endif
+                	</th>
 					@if (Auth::user()->isAdmin())
 					<th>Action</th>
 					@endif

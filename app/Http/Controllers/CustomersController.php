@@ -18,13 +18,13 @@ class CustomersController extends Controller
     // shows list of customers
     public function index(Request $request)
     {
-        $out = (new RequestsController)->sort($request);
+        $out = $this->sort($request);
         $sortby = $out['sortby'];
         $order = $out['order'];
         $sortMethod = 'CustomersController@index';
 
         $old = Customer::all();
-        $customers = $out['requests']->intersect($old);
+        $customers = $out['customers']->intersect($old);
 
         return view('customers.index', compact('customers', 'sortby', 'order', 'sortMethod'));
     }
@@ -112,11 +112,17 @@ class CustomersController extends Controller
             $order = 'asc';
         }
         if ($sortby) {
-            $customers = Customer::orderBy($sortby, $order)->get();
+            if ($sortby == 'name') {
+                $customers = Customer::orderByName($order)->get();
+            } elseif ($sortby == 'requests') {
+                $customers = Customer::orderByRequests($order)->get();
+            } else {
+                $customers = Customer::orderBy($sortby, $order)->get();
+            }
 
         } else {
             $sortby = '';
-            $customers = Customer::all();
+            $customers = Customer::orderByName($order)->get();
         }
 
         return ['sortby' => $sortby, 'order' => $order, 'customers' => $customers];
