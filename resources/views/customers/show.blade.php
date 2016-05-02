@@ -25,7 +25,7 @@
 			@foreach ($customer->insurances as $insurance)
 				<tr>
 					<td>{{ $insurance->name }}</td>
-					<td>{{ $insurance->provider->name }}</td>
+					<td><a href="{{ action('ProvidersController@show', [$insurance->provider->id]) }}" class="">{{ $insurance->provider->name }}</a></td>
 					<td>{{ $insurance->insuranceType->name }}</td>
 					@if (Auth::user()->isAdmin())
 						<td>
