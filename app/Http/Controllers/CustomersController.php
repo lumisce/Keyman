@@ -26,7 +26,10 @@ class CustomersController extends Controller
     // shows details of each customer inclusing insurance and requests
     public function show(Customer $customer)
     {
-        return view('customers.show', compact('customer'));
+        $showUser = true;
+        $showCustomer = false;
+        $requests = $customer->requests;
+        return view('customers.show', compact('customer', 'showUser', 'showCustomer', 'requests'));
     }
 
     // shows create customer form

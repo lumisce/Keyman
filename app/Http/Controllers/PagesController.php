@@ -34,6 +34,9 @@ class PagesController extends Controller
 
     public function account()
     {
-        return view('account');
+        $showUser = false;
+        $showCustomer = true;
+        $requests = \Auth::user()->requests;
+        return view('account', compact('showUser', 'showCustomer', 'requests'));
     }
 }

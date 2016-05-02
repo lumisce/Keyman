@@ -114,8 +114,10 @@ class AuthController extends Controller
         if ($user->id == \Auth::id()) {
             return redirect('account');
         }
-
-        return view('auth.show', compact('user'));
+        $showUser = false;
+        $showCustomer = true;
+        $requests = $user->requests;
+        return view('auth.show', compact('user', 'showUser', 'showCustomer', 'requests'));
     }
 
     public function setAdmin(User $user)
