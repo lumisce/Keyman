@@ -22,6 +22,6 @@ class Customer extends Model
 
     public function requests()
     {
-        return $this->hasMany('App\Request');
+        return $this->hasMany('App\KeymanRequest');
     }
 }

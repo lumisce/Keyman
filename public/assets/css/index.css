@@ -1,5 +1,6 @@
+
 body {
-	border-top: 8px solid rgb(233,130,51);
+	border-top: 8px solid rgb(232,131,52);
 	text-align: center;
 }
 
@@ -16,7 +17,7 @@ body {
 }
 
 @media (max-width: 640px){
-
+	
 	.container_top_padding {
 		padding-top: 10%;
 	}
@@ -25,3 +26,4 @@ body {
 		font-size: 42pt;
 	}
 }
+

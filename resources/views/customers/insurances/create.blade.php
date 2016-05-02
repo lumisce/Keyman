@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Add a New Insurance to Customer</h1>
+	<h1>Add a New Insurance to {{ $customer->first_name . " " . $customer->last_name }}</h1>
 
 	<hr>
 
 	@include('errors._list')
 
-	{!! Form::open(['url' => 'customers/'. Request::segment(2) .'/insurances']) !!}
+	{!! Form::open(['action' => ['CustomerInsurancesController@store', $customer->id]]) !!}
 		@include('customers.insurances._form', ['submitButtonText' => 'Add Insurance'])
 	{!! Form::close() !!}
 
