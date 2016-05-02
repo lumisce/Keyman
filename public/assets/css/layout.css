@@ -39,6 +39,7 @@ h1 {
 
 .btn {
     align: center;
+    border-radius: 0;
 }
 
 .btn-primary {
@@ -46,7 +47,6 @@ h1 {
     background-color: rgb(233,130,51);
     border: 0;
     padding: 14px 0;
-    min-width: 96px;
     width: 50%;
 }
 
@@ -54,13 +54,22 @@ h1 {
     margin-right: 6px;
 }
 
+.form-control{
+    border-radius: 0;
+    border-width: 2px;
+    border-color: #888888;
+}
+
 .panel-default{
     padding: 0;
+    margin: auto;
+    border-radius: 0;
 }
 
 .panel-default .panel-heading {
     background-color: rgb(232,131,52);
-    border: 0px;
+    border: 0;
+    border-radius: 0;
 }
 
 .navbar-default {
@@ -88,6 +97,10 @@ h1 {
     color: rgb(0,77,139);
     padding: 14px 15px 14px 15px;
     font-family:'Nav';
+}
+
+.no-margin {
+    margin: 0 auto;
 }
 
 
