@@ -44,7 +44,12 @@
 					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
 					<td>
 						@if ($krequest->status == 'ONGOING')
-						<a href="{{ action('RequestsController@edit', [$krequest->customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
+						{{-- <a href="{{ action('RequestsController@update', [$krequest->customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a> --}}
+						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
+							<fieldset class="form-group"> 
+								{!! Form::submit('Process', ['class' => 'btn btn-primary']) !!}
+							</fieldset>
+						{!! Form::close() !!}
 						@endif
 					</td>
 					<td>
@@ -73,11 +78,14 @@
 
 @section('footer')
 	<script>
-	    $(".deleteForm").on("submit", function(){
-	        return confirm("Do you want to delete this item?");
+	    $(".updateForm").on("submit", function(){
+	        return confirm("Do you want to process this request?");
 	    });
 	    $(".completeForm").on("submit", function(){
 	        return confirm("Do you want to complete this request?");
+	    });
+	    $(".deleteForm").on("submit", function(){
+	        return confirm("Do you want to delete this item?");
 	    });
 	</script>
 @stop

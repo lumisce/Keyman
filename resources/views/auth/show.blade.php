@@ -49,7 +49,11 @@
 					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
 					<td>
 						@if ($krequest->status == 'ONGOING')
-						<a href="{{ action('RequestsController@edit', [$krequest->customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
+						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
+							<fieldset class="form-group"> 
+								{!! Form::submit('Process', ['class' => 'btn btn-primary']) !!}
+							</fieldset>
+						{!! Form::close() !!}
 						@endif
 					</td>
 					<td>

@@ -25,9 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('about', 'PagesController@about');
     Route::get('browse', 'PagesController@browse');
 
-    Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
+    Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show', 'edit']]);
     Route::match(['put', 'patch'], 'customers/{customers}/requests/{requests}/complete', 'RequestsController@complete');
-    Route::post('customers/{customers}/requests/{requests}/email', 'RequestsController@email');
     Route::resource('customers.insurances', 'CustomerInsurancesController', ['only' => ['create', 'store', 'destroy']]);
     Route::resource('customers', 'CustomersController');
     Route::resource('requests', 'RequestsController', ['only' => ['index']]);

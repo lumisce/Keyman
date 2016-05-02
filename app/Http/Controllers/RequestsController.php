@@ -60,23 +60,14 @@ class RequestsController extends Controller
         return redirect()->route('customers.show', [$customer]);
     }
 
-    public function edit(Customer $customer, KeymanRequest $krequest)
-    {
-        $receiver = $krequest->insurance->provider->email;
-        $subject = $krequest->type->name;
-        $content = 'Customer Name: ' . $customer->first_name . ' ' . $customer->last_name
-            . ', Insurance: ' . $krequest->insurance->name;
-
-        return view('customers.requests.edit', compact('customer', 'krequest', 'receiver', 'subject', 'content'));
-    }
-
     public function update(Request $request, Customer $customer, KeymanRequest $krequest)
     {
         $krequest->users()->sync([\Auth::user()->id => ['progress' => 'sent request']]);
         $krequest->status = 'PENDING';
         $krequest->save();
 
-        flash()->success('Request has been updated!');
+        $provider = $krequest->insurance->provider;
+        flash()->info('Send request to ' . $provider->name . ' at ' . $provider->email .' or ' . $provider->phone_num);
         return redirect()->back();
     }
 
@@ -111,12 +102,7 @@ class RequestsController extends Controller
         $krequest->status = 'COMPLETED';
         $krequest->save();
 
-        flash()->success('Request has been completed!');
-        return redirect()->back();
-    }
-
-    public function email(Request $request, Customer $customer, KeymanRequest $krequest)
-    {
+        flash()->info('Notify ' . $customer->first_name . ' at ' . $customer->email .' or ' . $customer->phone_num);
         return redirect()->back();
     }
 

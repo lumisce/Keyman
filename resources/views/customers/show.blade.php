@@ -65,7 +65,11 @@
 					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
 					<td>{{ $krequest->status }}</td>
 					<td>
-						<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
+						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
+							<fieldset class="form-group"> 
+								{!! Form::submit('Process', ['class' => 'btn btn-primary']) !!}
+							</fieldset>
+						{!! Form::close() !!}
 					</td>
 					@if (Auth::user()->isAdmin())
 						<td>
