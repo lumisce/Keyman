@@ -84,9 +84,7 @@ class AuthController extends Controller
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            $this->throwValidationException(
-                $request, $validator
-            );
+            $this->throwValidationException($request, $validator);
         }
 
         User::create($request->all());
@@ -101,10 +99,18 @@ class AuthController extends Controller
         return view('auth.index', compact('users'));
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        $users = User::all();
-        return view('auth.index', compact('users'));
+        return view('auth.edit', compact('user'));
+    }
+
+    public function show(User $user)
+    {
+        if ($user->id == \Auth::id()) {
+            return redirect('account');
+        }
+
+        return view('auth.show', compact('user'));
     }
 
     public function setAdmin(User $user)

@@ -20,7 +20,7 @@
 		</thead>
 		@foreach ($users as $user)
 			<tr>
-				<td>{{ $user->name }}</td>
+				<td><a href="{{ action('Auth\AuthController@show', [$user->id]) }}" class="">{{ $user->name }}</a></td>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->phone_num }}</td>
 				<td>{{ $user->isAdmin() ? 'Yes' : 'No' }}</td>
