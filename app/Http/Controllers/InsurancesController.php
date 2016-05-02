@@ -33,7 +33,7 @@ class InsurancesController extends Controller
         $request->merge(['insurance_type_id' => $input]);
         $insurance = $provider->insurances()->create($request->except(['type']));
 
-        flash()->success('Insurance Plan has been created!');
+        flash()->success($insurance->name . ' has been created!');
         return redirect()->route('providers.show', [$provider]);
     }
 
@@ -54,16 +54,17 @@ class InsurancesController extends Controller
 
         $insurance->update($request->except(['type']));
 
-        flash()->success('Insurance Plan has been updated!');
+        flash()->success($insurance->name . ' has been updated!');
         return redirect()->route('providers.show', [$provider]);
     }
 
     // admin only
     public function destroy(Provider $provider, Insurance $insurance)
     {
+        $name = $insurance->name;
         $insurance->delete();
 
-        flash()->success('Insurance Plan has been deleted!');
+        flash()->success($name . ' has been deleted!');
         return redirect()->route('providers.show', [$provider]);
     }
 

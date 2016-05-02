@@ -49,7 +49,7 @@ class ProvidersController extends Controller
         $this->validate($request, $this->getRules());
         $provider = Provider::create($request->all());
 
-        flash()->success('Provider has been created!');
+        flash()->success($provider->name . ' has been added!');
         return redirect('providers');
     }
 
@@ -71,7 +71,7 @@ class ProvidersController extends Controller
         $this->validate($request, $rules);
         $provider->update($request->all());
 
-        flash()->success('Provider has been updated!');
+        flash()->success($provider->name . ' has been updated!');
         return redirect(URL::route('providers.show', [$provider->id]));
     }
 
@@ -79,9 +79,10 @@ class ProvidersController extends Controller
     // processes delete provider
     public function destroy(Provider $provider, Request $request)
     {
+        $name = $provider->name;
         $provider->delete();
 
-        flash()->success('Provider has been deleted!');
+        flash()->success($name . ' has been deleted!');
         return redirect('providers');
     }
 

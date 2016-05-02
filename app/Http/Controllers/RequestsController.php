@@ -109,7 +109,7 @@ class RequestsController extends Controller
         $krequest->status = 'COMPLETED';
         $krequest->save();
 
-        flash()->info('Notify ' . $customer->first_name . ' at ' . $customer->email .' or ' . $customer->phone_num);
+        flash()->info('Notify ' . $customer->fullName . ' at ' . $customer->email .' or ' . $customer->phone_num);
         return redirect()->back();
     }
 

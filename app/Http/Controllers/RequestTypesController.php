@@ -38,7 +38,7 @@ class RequestTypesController extends Controller
         $this->validate($request, $this->getRules());
         $type = RequestType::create($request->all());
 
-        flash()->success('Request Type has been created!');
+        flash()->success($type->name . ' has been created!');
         return redirect('request_types');
     }
 
@@ -59,7 +59,7 @@ class RequestTypesController extends Controller
         $this->validate($request, $rules);
         $type->update($request->all());
 
-        flash()->success('Insurance Type has been updated!');
+        flash()->success($type->name . ' has been updated!');
         return redirect(route('request_types.index'));
     }
 
@@ -69,7 +69,7 @@ class RequestTypesController extends Controller
     {
         $type->delete();
 
-        flash()->success('Request Type has been deleted!');
+        flash()->success($type->name . ' has been deleted!');
         return redirect(route('request_types.index'));
     }
 

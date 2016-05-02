@@ -38,7 +38,7 @@ class TypesController extends Controller
         $this->validate($request, $this->getRules());
         $type = InsuranceType::create($request->all());
 
-        flash()->success('Insurance Type has been created!');
+        flash()->success('Type: ' . $type->name . ' has been created!');
         return redirect('types');
     }
 
@@ -59,7 +59,7 @@ class TypesController extends Controller
         $this->validate($request, $rules);
         $type->update($request->all());
 
-        flash()->success('Insurance Type has been updated!');
+        flash()->success('Type: ' . $type->name . ' has been updated!');
         return redirect(route('types.index'));
     }
 
@@ -69,7 +69,7 @@ class TypesController extends Controller
     {
         $type->delete();
 
-        flash()->success('Insurance Type has been deleted!');
+        flash()->success('Type: ' . $type->name . ' has been deleted!');
         return redirect(route('types.index'));
     }
 

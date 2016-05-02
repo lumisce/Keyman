@@ -79,9 +79,9 @@ class AuthController extends Controller
         $rules = $this->getRules();
         $this->validate($request, $rules);
 
-        User::create($request->all());
+        $user = User::create($request->all());
 
-        flash()->success('User has been created!');
+        flash()->success($user->name . ' has been registered!');
         return redirect('users');
     }
 
@@ -147,7 +147,7 @@ class AuthController extends Controller
         }
         $user->save();
 
-        flash()->success('User has been '. $s .' as admin!');
+        flash()->success($user->name . ' has been '. $s .' as admin!');
         return redirect('users');
     }
 

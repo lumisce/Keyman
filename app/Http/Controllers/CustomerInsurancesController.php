@@ -33,10 +33,10 @@ class CustomerInsurancesController extends Controller
         $request->merge(['insurance_id' => $input]);
         if (!$customer->insurances->contains($request['insurance_id'])) {
             $customer->insurances()->attach($request->only(['insurance_id']));
-            flash()->success('Insurance has been added!');
+            flash()->success(Insurance::findOrFail($request['insurance_id'])->name . ' has been added!');
             return redirect()->route('customers.show', [$customer]);
         }
-        flash()->error('Insurance already exists!');
+        flash()->error(Insurance::findOrFail($request['insurance_id'])->name . ' already exists!');
         return redirect()->route('customers.show', [$customer]);
 
     }
@@ -45,7 +45,7 @@ class CustomerInsurancesController extends Controller
     public function destroy(Customer $customer, Insurance $insurance)
     {
         $customer->insurances()->detach($insurance->id);
-        flash()->success('Insurance Plan has been deleted!');
+        flash()->success($insurance->name . ' has been removed!');
         return redirect()->route('customers.show', [$customer]);
     }
 

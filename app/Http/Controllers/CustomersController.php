@@ -57,7 +57,7 @@ class CustomersController extends Controller
         $this->validate($request, $this->getRules());
         $customer = Customer::create($request->all());
 
-        flash()->success('Customer has been created!');
+        flash()->success($customer->fullName . ' has been created!');
         return redirect('customers');
     }
 
@@ -77,7 +77,7 @@ class CustomersController extends Controller
         $this->validate($request, $rules);
         $customer->update($request->all());
 
-        flash()->success('Customer has been updated!');
+        flash()->success($customer->fullName . ' has been updated!');
         return redirect(URL::route('customers.show', [$customer->id]));
     }
 
@@ -85,9 +85,10 @@ class CustomersController extends Controller
     // processes delete customer to database
     public function destroy(Customer $customer, Request $request)
     {
+        $name = $customer->fullName;
         $customer->delete();
 
-        flash()->success('Customer has been deleted!');
+        flash()->success($name . ' has been deleted!');
         return redirect('customers');
     }
 
