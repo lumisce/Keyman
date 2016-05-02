@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/browse';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new authentication controller instance.
@@ -37,7 +38,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit']]);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register', 'update', 'show', 'setAdmin']]);
+        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index', 'show']]);
     }
 
     /**
@@ -77,6 +79,22 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        User::create($request->all());
+
+        flash()->success('User has been created!');
+        return redirect('users');
+    }
+
     public function index()
     {
         $users = User::all();
@@ -87,5 +105,20 @@ class AuthController extends Controller
     {
         $users = User::all();
         return view('auth.index', compact('users'));
+    }
+
+    public function setAdmin(User $user)
+    {
+        $s = "set";
+        if ($user->isAdmin()) {
+            $user->is_admin = 0;
+            $s = "unset";
+        } else {
+            $user->is_admin = 1;
+        }
+        $user->save();
+
+        flash()->success('User has been '. $s .' as admin!');
+        return redirect('users');
     }
 }

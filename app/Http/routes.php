@@ -18,13 +18,16 @@ Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit']]);
+    Route::resource('users', 'Auth\AuthController', ['only' => ['index', 'edit', 'update', 'show']]);
+    Route::post('users/{users}/admin', 'Auth\AuthController@setAdmin');
 
     Route::get('account', 'PagesController@account');
     Route::get('about', 'PagesController@about');
     Route::get('browse', 'PagesController@browse');
 
     Route::resource('customers.requests', 'RequestsController', ['except' => ['index', 'show']]);
+    Route::match(['put', 'patch'], 'customers/{customers}/requests/{requests}/complete', 'RequestsController@complete');
+    Route::post('customers/{customers}/requests/{requests}/email', 'RequestsController@email');
     Route::resource('customers.insurances', 'CustomerInsurancesController', ['only' => ['create', 'store', 'destroy']]);
     Route::resource('customers', 'CustomersController');
     Route::resource('requests', 'RequestsController', ['only' => ['index']]);

@@ -71,7 +71,8 @@ class InsurancesController extends Controller
     {
         return [
             'name' => 'required',
-            'type' => 'required|not_in:0'
+            'type' => 'required|not_in:0',
+            'payment' => 'required|not_in:0'
         ];
     }
 }

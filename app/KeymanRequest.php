@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class KeymanRequest extends Model
 {
     protected $fillable = [
+        'customer_id',
         'insurance_id',
         'request_type_id',
+        'turnaround_date',
         'status',
     ];
 
@@ -18,21 +20,24 @@ class KeymanRequest extends Model
 
     public function type()
     {
-        $this->belongsTo('App\RequestType');
+        return $this->belongsTo('App\RequestType', 'request_type_id');
     }
 
     public function insurance()
     {
-        $this->belongsTo('App\Insurance');
+        return $this->belongsTo('App\Insurance');
     }
 
     public function customer()
     {
-        $this->belongsTo('App\Customer');
+        return $this->belongsTo('App\Customer');
     }
 
     public function users()
     {
-        $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'request_users', 'request_id', 'user_id')
+            ->withPivot('progress')
+            ->withTimestamps()
+            ->orderBy('pivot_created_at', 'desc');
     }
 }

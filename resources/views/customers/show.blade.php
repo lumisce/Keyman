@@ -29,7 +29,7 @@
 					<td>{{ $insurance->insuranceType->name }}</td>
 					@if (Auth::user()->isAdmin())
 						<td>
-							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'id' => 'deleteForm']) !!}
+							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'class' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
 									{!! Form::submit('Remove Insurance', ['class' => 'btn btn-danger']) !!}
 								</fieldset>
@@ -46,26 +46,36 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					<th>Date Received</th>
 					<th>Insurance</th>
-					<th>Provider</th>
 					<th>Type</th>
+					<th>Turnaround Date</th>
 					<th>Status</th>
-					@if (Auth::user()->isAdmin())
 					<th>Action</th>
+					@if (Auth::user()->isAdmin())
+					<th></th>
 					@endif
 				</tr>
 			</thead>
 			@foreach ($customer->requests as $krequest)
 				<tr>
+					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					<td>{{ $krequest->insurance->name }}</td>
-					<td>{{ $krequest->insurance->provider }}</td>
 					<td>{{ $krequest->type->name }}</td>
+					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
 					<td>{{ $krequest->status }}</td>
 					<td>
-						@if (Auth::user()->isAdmin())
-							<a href="{{ action('RequestsController@edit', [$customer->id, $request->id]) }}" class="btn btn-primary">Edit</a>
-						@endif
+						<a href="{{ action('RequestsController@edit', [$customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a>
 					</td>
+					@if (Auth::user()->isAdmin())
+						<td>
+							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $customer->id, $krequest->id], 'class' => 'deleteForm']) !!}
+								<fieldset class="form-group"> 
+									{!! Form::submit('Delete Request', ['class' => 'btn btn-danger']) !!}
+								</fieldset>
+							{!! Form::close() !!}
+						</td>
+					@endif
 				</tr>
 			@endforeach
 		</table>
@@ -74,7 +84,7 @@
 
 @section('footer')
 	<script>
-	    $("#deleteForm").on("submit", function(){
+	    $(".deleteForm").on("submit", function(){
 	        return confirm("Do you want to delete this item?");
 	    });
 	</script>
