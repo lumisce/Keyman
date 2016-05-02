@@ -85,10 +85,16 @@ class AuthController extends Controller
         return redirect('users');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('auth.index', compact('users'));
+        $out = $this->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'Auth\AuthController@index';
+
+        $old = User::all();
+        $users = $out['users']->intersect($old);
+        return view('auth.index', compact('users', 'sortby', 'order', 'sortMethod'));
     }
 
     public function edit(User $user)
@@ -143,5 +149,24 @@ class AuthController extends Controller
 
         flash()->success('User has been '. $s .' as admin!');
         return redirect('users');
+    }
+
+    private function sort(Request $request)
+    {
+        // sortby = is_admin, name, email
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            $users = User::orderBy($sortby, $order)->get();
+
+        } else {
+            $sortby = null;
+            $users = User::orderBy('name', $order)->get();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'users' => $users];
     }
 }
