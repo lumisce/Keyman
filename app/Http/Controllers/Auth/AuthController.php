@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RequestsController;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -109,15 +110,24 @@ class AuthController extends Controller
         return redirect('account');
     }
 
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
         if ($user->id == \Auth::id()) {
             return redirect('account');
         }
+
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'Auth\AuthController@show';
+        $attach = $user->id;
+
         $showUser = false;
         $showCustomer = true;
-        $requests = $user->requests;
-        return view('auth.show', compact('user', 'showUser', 'showCustomer', 'requests'));
+        $old = $user->requests;
+        $requests = $out['requests']->intersect($old);
+
+        return view('auth.show', compact('user', 'showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod', 'attach'));
     }
 
     public function setAdmin(User $user)

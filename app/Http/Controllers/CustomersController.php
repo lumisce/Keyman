@@ -16,20 +16,33 @@ class CustomersController extends Controller
     }
 
     // shows list of customers
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'CustomersController@index';
 
-        return view('customers.index', compact('customers'));
+        $old = Customer::all();
+        $customers = $out['requests']->intersect($old);
+
+        return view('customers.index', compact('customers', 'sortby', 'order', 'sortMethod'));
     }
 
     // shows details of each customer inclusing insurance and requests
-    public function show(Customer $customer)
+    public function show(Request $request, Customer $customer)
     {
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'CustomersController@show';
+        $attach = $customer->id;
+
         $showUser = true;
         $showCustomer = false;
-        $requests = $customer->requests;
-        return view('customers.show', compact('customer', 'showUser', 'showCustomer', 'requests'));
+        $old = $customer->requests;
+        $requests = $out['requests']->intersect($old);
+        return view('customers.show', compact('customer', 'showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod', 'attach'));
     }
 
     // shows create customer form
@@ -88,5 +101,24 @@ class CustomersController extends Controller
             'email' => 'unique:customers',
             'phone_num' => 'required|unique:customers|regex:/^\+?[^a-zA-Z]{5,}$/'
         ];
+    }
+
+    private function sort(Request $request)
+    {
+        // sortby = total_requests, name, email
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            $customers = Customer::orderBy($sortby, $order)->get();
+
+        } else {
+            $sortby = '';
+            $customers = Customer::all();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'customers' => $customers];
     }
 }

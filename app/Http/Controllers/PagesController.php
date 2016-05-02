@@ -32,11 +32,21 @@ class PagesController extends Controller
         return view('browse', compact('customers', 'providers'));
     }
 
-    public function account()
+    public function account(Request $request)
     {
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'PagesController@account';
+        
         $showUser = false;
         $showCustomer = true;
-        $requests = \Auth::user()->requests;
-        return view('account', compact('showUser', 'showCustomer', 'requests'));
+        $old = \Auth::user()->requests;
+        $requests = $out['requests']->intersect($old);
+        
+        return view('account', compact('showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod'));
+
+
+
     }
 }
