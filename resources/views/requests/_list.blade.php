@@ -26,7 +26,7 @@
 				<tr>
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					@if ($showCustomer)
-						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->first_name . ' ' . $krequest->customer->last_name . ', ' . $krequest->customer->middle_name  }}</a></td>
+						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->fullName  }}</a></td>
 					@endif
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type->name }}</td>

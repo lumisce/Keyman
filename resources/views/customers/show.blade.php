@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>{{ $customer->first_name . ' ' . $customer->last_name . ', ' . $customer->middle_name }} <a href="{{ action('CustomersController@edit', [$customer->id])}}" class="btn btn-primary">Edit</a></h1>
+	<h1>{{ $customer->fullName }} <a href="{{ action('CustomersController@edit', [$customer->id])}}" class="btn btn-primary">Edit</a></h1>
 	<hr>
 		<content>
 			{{ $customer->email }}

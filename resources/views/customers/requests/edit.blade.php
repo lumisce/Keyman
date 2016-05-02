@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Process: [{{ $krequest->type->name }}] {!! $customer->first_name . ' ' . $customer->last_name . "'s " . $krequest->insurance->name !!} 
+	<h1>Process: [{{ $krequest->type->name }}] {!! $customer->fullName . "'s " . $krequest->insurance->name !!} 
 		{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $customer->id, $krequest->id]]) !!}
 			<fieldset class="form-group"> 
 				{!! Form::submit('Set Status to Pending', ['class' => 'btn btn-info']) !!}

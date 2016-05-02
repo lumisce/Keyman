@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Edit: {!! $customer->first_name . ' ' . $customer->last_name . ', ' . $customer->middle_name  !!}</h1>
+	<h1>Edit: {!! $customer->fullName  !!}</h1>
 	
 	<hr>
 

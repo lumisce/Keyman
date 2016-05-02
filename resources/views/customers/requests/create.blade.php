@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Add a New Request to {{ $customer->first_name . " " . $customer->last_name }}</h1>
+	<h1>Add a New Request to {{ $customer->fullName }}</h1>
 
 	<hr>
 

@@ -20,7 +20,7 @@
 
 			@foreach ($customers as $customer)
 				<tr>
-					<td><a href="{{ action('CustomersController@show', [$customer->id]) }}" class="">{{ $customer->first_name . ' ' . $customer->last_name . ', ' . $customer->middle_name  }}</a></td>
+					<td><a href="{{ action('CustomersController@show', [$customer->id]) }}" class="">{{ $customer->fullName }}</a></td>
 					<td>{{ $customer->email }}</td>
 					<td>{{ $customer->phone_num }}</td>
 					<td>{{ $customer->total_requests }}</td>
