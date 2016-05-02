@@ -18,35 +18,58 @@
 					<th>Date Received</th>
 					<th>Customer</th>
 					<th>Insurance</th>
-					<th>Type</th>
+					<th>Request</th>
 					<th>Turnaround Date</th>
 					<th>Status</th>
+					<th>Progress</th>
 					<th>Action</th>
+					<th></th>
 					@if (Auth::user()->isAdmin())
 					<th></th>
 					@endif
 				</tr>
 			</thead>
+
 			@foreach (Auth::user()->requests as $krequest)
 				<tr>
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
-					<td>{{ $krequest->customer->first_name . " " . $krequest->customer->last_name }}</td>
+					<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->first_name . ' ' . $krequest->customer->last_name . ', ' . $krequest->customer->middle_name  }}</a></td>
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type->name }}</td>
-					<td>{{ explode(' ',$krequest->turnaround_date)[0] }}</td>
-					<td>{{ $krequest->status }}</td>
+					<td>{{ explode(' ', $krequest->turnaround_date)[0] }}</td>
 					<td>
+						@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
+							{{ 'OVERDUE' }}
+						@elseif (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
+							{{ 'URGENT' }}
+						@else
+							{{ $krequest->status }}
+						@endif
+					</td>
+					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
+					<td>
+						@if ($krequest->status == 'ONGOING')
 						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
 							<fieldset class="form-group"> 
 								{!! Form::submit('Process', ['class' => 'btn btn-primary']) !!}
 							</fieldset>
 						{!! Form::close() !!}
+						@endif
+					</td>
+					<td>
+						@if ($krequest->status == 'PENDING' && Auth::id() == $krequest->users()->first()->id)
+						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@complete', $krequest->customer->id, $krequest->id], 'class' => 'completeForm']) !!}
+							<fieldset class="form-group"> 
+								{!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
+							</fieldset>
+						{!! Form::close() !!}
+						@endif
 					</td>
 					@if (Auth::user()->isAdmin())
 						<td>
 							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $krequest->customer->id, $krequest->id], 'class' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
-									{!! Form::submit('Delete Request', ['class' => 'btn btn-danger']) !!}
+									{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 								</fieldset>
 							{!! Form::close() !!}
 						</td>

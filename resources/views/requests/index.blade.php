@@ -31,7 +31,7 @@
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type->name }}</td>
 					<td>{{ explode(' ', $krequest->turnaround_date)[0] }}</td>
-					<td>{{ $krequest->users()->first()->name }}</td>
+					<td><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
 					<td>
 						@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
 							{{ 'OVERDUE' }}
@@ -44,7 +44,6 @@
 					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
 					<td>
 						@if ($krequest->status == 'ONGOING')
-						{{-- <a href="{{ action('RequestsController@update', [$krequest->customer->id, $krequest->id]) }}" class="btn btn-primary">Process</a> --}}
 						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
 							<fieldset class="form-group"> 
 								{!! Form::submit('Process', ['class' => 'btn btn-primary']) !!}

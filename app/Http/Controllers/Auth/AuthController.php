@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register', 'update', 'show', 'setAdmin']]);
-        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index', 'show']]);
+        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index']]);
     }
 
     // validation rules
