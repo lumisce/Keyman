@@ -26,14 +26,27 @@ class PagesController extends Controller
     {
         $customers = Customer::select(DB::raw("CONCAT(first_name, ' ', last_name, ', ', middle_name) AS full_name, id"))
             ->pluck('full_name', 'id');
-        $customers->prepend(null);
+        $customers->prepend(null, 0);
         $providers = Provider::pluck('name', 'id');
-        $providers->prepend(null);
+        $providers->prepend(null, 0);
         return view('browse', compact('customers', 'providers'));
     }
 
-    public function account()
+    public function account(Request $request)
     {
-        return view('account');
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'PagesController@account';
+        
+        $showUser = false;
+        $showCustomer = true;
+        $old = \Auth::user()->requests;
+        $requests = $out['requests']->intersect($old);
+        
+        return view('account', compact('showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod'));
+
+
+
     }
 }

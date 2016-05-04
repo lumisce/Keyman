@@ -16,17 +16,33 @@ class CustomersController extends Controller
     }
 
     // shows list of customers
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $out = $this->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'CustomersController@index';
 
-        return view('customers.index', compact('customers'));
+        $old = Customer::all();
+        $customers = $out['customers']->intersect($old);
+
+        return view('customers.index', compact('customers', 'sortby', 'order', 'sortMethod'));
     }
 
     // shows details of each customer inclusing insurance and requests
-    public function show(Customer $customer)
+    public function show(Request $request, Customer $customer)
     {
-        return view('customers.show', compact('customer'));
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'CustomersController@show';
+        $attach = $customer->id;
+
+        $showUser = true;
+        $showCustomer = false;
+        $old = $customer->requests;
+        $requests = $out['requests']->intersect($old);
+        return view('customers.show', compact('customer', 'showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod', 'attach'));
     }
 
     // shows create customer form
@@ -41,7 +57,7 @@ class CustomersController extends Controller
         $this->validate($request, $this->getRules());
         $customer = Customer::create($request->all());
 
-        flash()->success('Customer has been created!');
+        flash()->success($customer->fullName . ' has been created!');
         return redirect('customers');
     }
 
@@ -61,7 +77,7 @@ class CustomersController extends Controller
         $this->validate($request, $rules);
         $customer->update($request->all());
 
-        flash()->success('Customer has been updated!');
+        flash()->success($customer->fullName . ' has been updated!');
         return redirect(URL::route('customers.show', [$customer->id]));
     }
 
@@ -69,9 +85,10 @@ class CustomersController extends Controller
     // processes delete customer to database
     public function destroy(Customer $customer, Request $request)
     {
+        $name = $customer->fullName;
         $customer->delete();
 
-        flash()->success('Customer has been deleted!');
+        flash()->success($name . ' has been deleted!');
         return redirect('customers');
     }
 
@@ -85,5 +102,30 @@ class CustomersController extends Controller
             'email' => 'unique:customers',
             'phone_num' => 'required|unique:customers|regex:/^\+?[^a-zA-Z]{5,}$/'
         ];
+    }
+
+    private function sort(Request $request)
+    {
+        // sortby = total_requests, name, email
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            if ($sortby == 'name') {
+                $customers = Customer::orderByName($order)->get();
+            } elseif ($sortby == 'requests') {
+                $customers = Customer::orderByRequests($order)->get();
+            } else {
+                $customers = Customer::orderBy($sortby, $order)->get();
+            }
+
+        } else {
+            $sortby = '';
+            $customers = Customer::orderByName($order)->get();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'customers' => $customers];
     }
 }

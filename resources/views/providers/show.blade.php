@@ -22,6 +22,7 @@
 				<tr>
 					<th>Name</th>
 					<th>Type</th>
+					<th>Payment</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -29,6 +30,7 @@
 				<tr>
 					<td>{{ $insurance->name }}</td>
 					<td>{{ $insurance->insuranceType->name }}</td>
+					<td>{{ $insurance->payment }}</td>
 					<td><a href="{{ action('InsurancesController@edit', [$provider->id, $insurance->id]) }}" class="btn btn-primary">Edit</a></td>
 				</tr>
 			@endforeach

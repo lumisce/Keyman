@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RequestsController;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/browse';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new authentication controller instance.
@@ -37,23 +38,19 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit']]);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'index', 'edit', 'showRegistrationForm', 'register', 'update', 'show', 'setAdmin']]);
+        $this->middleware('admin', ['only' => ['showRegistrationForm', 'register', 'setAdmin', 'index']]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    // validation rules
+    private function getRules()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
+        return [
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'phone_num' => 'numeric|unique:users',
+            'phone_num' => 'required|numeric|unique:users',
             'password' => 'required|min:6|confirmed',
-        ]);
+        ];
     }
 
     /**
@@ -77,15 +74,99 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function index()
+    public function register(Request $request)
     {
-        $users = User::all();
-        return view('auth.index', compact('users'));
+        $rules = $this->getRules();
+        $this->validate($request, $rules);
+
+        $user = User::create($request->all());
+
+        flash()->success($user->name . ' has been registered!');
+        return redirect('users');
     }
 
-    public function edit()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('auth.index', compact('users'));
+        $out = $this->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'Auth\AuthController@index';
+
+        $old = User::all();
+        $users = $out['users']->intersect($old);
+        return view('auth.index', compact('users', 'sortby', 'order', 'sortMethod'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('auth.edit', compact('user'));
+    }
+    
+    public function update(Request $request)
+    {
+        $rules = $this->getRules();
+        $rules['name'] = 'required|max:255|unique:users' . ',id,' . \Auth::id();
+        $rules['email'] = 'required|email|max:255|unique:users' . ',id,' . \Auth::id();
+        $rules['phone_num'] = 'required|numeric|unique:users' . ',id,' . \Auth::id();
+
+        $this->validate($request, $rules);
+        \Auth::user()->update($request->all());
+
+        flash()->success('Account has been updated!');
+        return redirect('account');
+    }
+
+    public function show(Request $request, User $user)
+    {
+        if ($user->id == \Auth::id()) {
+            return redirect('account');
+        }
+
+        $out = (new RequestsController)->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'Auth\AuthController@show';
+        $attach = $user->id;
+
+        $showUser = false;
+        $showCustomer = true;
+        $old = $user->requests;
+        $requests = $out['requests']->intersect($old);
+
+        return view('auth.show', compact('user', 'showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod', 'attach'));
+    }
+
+    public function setAdmin(User $user)
+    {
+        $s = "set";
+        if ($user->isAdmin()) {
+            $user->is_admin = 0;
+            $s = "unset";
+        } else {
+            $user->is_admin = 1;
+        }
+        $user->save();
+
+        flash()->success($user->name . ' has been '. $s .' as admin!');
+        return redirect('users');
+    }
+
+    private function sort(Request $request)
+    {
+        // sortby = is_admin, name, email
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            $users = User::orderBy($sortby, $order)->get();
+
+        } else {
+            $sortby = null;
+            $users = User::orderBy('name', $order)->get();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'users' => $users];
     }
 }

@@ -1,11 +1,18 @@
 body {
     padding-top: 5%;
+    background-color: white;
+}
+
+.panel-body {
+    background-color: #f2f2f2;
+    border-color: transparent;
 }
 
 .form-horizontal .control-label {
     padding-top: 20px;
     text-align: left;
     font-family: 'Nav';
+    font-size: 12px;
 }
 
 .navbar-default {
@@ -16,51 +23,34 @@ a.btn.btn-link {
     font-size: 12px;
     color: rgb(38,38,38);
     padding-left: 0;
-    padding-top: 20px;
 }
 
 .form-group {
-    padding: 2% 12% 2% 12%;
+    padding: 2% 8% 2% 8%;
 }
 
 .btn.btn-primary {
-    width: 50%;
-    margin-left: 25%;
-    min-width: 96px;
+    width: 75%;
+    min-width: 150px;
     text-align: center;
+    font-size: 10pt;
+    font-family: 'Nav';
+    margin: 0 auto;
 }
 
-.checkbox {
-    margin-left: 38.5%;
+.checkbox { 
+    font-size: 12px;
 }
 
-@media (min-width: 992px) {
-    .form-group {
-        padding-top: 2%;
-        margin-bottom: 0;
-    }
-    .btn.btn-primary {
-        width: 100%;
-        margin: 0;
-    }
-    .checkbox {
-        margin-left: 25%;
-    }
-
+@media (min-width: 390px){
+    .panel-default {
+            width: 350px;
+    }    
 }
 
-@media (min-width: 764px) {
-
-    a.btn.btn-link {
-        text-align: center;
-        margin-bottom: 0;
-        padding: 0;
-        width: 100%;
-    }
-
+@media (max-width: 360px){
+    .panel-default {
+        margin: 0
+    }    
 }
-@media (max-width: 480px) {
-    .checkbox {
-        margin-left: 0%;
-    }   
-}
+

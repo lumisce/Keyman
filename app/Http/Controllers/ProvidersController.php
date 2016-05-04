@@ -16,11 +16,17 @@ class ProvidersController extends Controller
     }
 
     // shows list of providers
-    public function index()
+    public function index(Request $request)
     {
-        $providers = Provider::all();
+        $out = $this->sort($request);
+        $sortby = $out['sortby'];
+        $order = $out['order'];
+        $sortMethod = 'ProvidersController@index';
 
-        return view('providers.index', compact('providers'));
+        $old = Provider::all();
+        $providers = $out['providers']->intersect($old);
+
+        return view('providers.index', compact('providers', 'sortby', 'order', 'sortMethod'));
     }
 
     // shows details of each provider including plans
@@ -43,7 +49,7 @@ class ProvidersController extends Controller
         $this->validate($request, $this->getRules());
         $provider = Provider::create($request->all());
 
-        flash()->success('Provider has been created!');
+        flash()->success($provider->name . ' has been added!');
         return redirect('providers');
     }
 
@@ -65,7 +71,7 @@ class ProvidersController extends Controller
         $this->validate($request, $rules);
         $provider->update($request->all());
 
-        flash()->success('Provider has been updated!');
+        flash()->success($provider->name . ' has been updated!');
         return redirect(URL::route('providers.show', [$provider->id]));
     }
 
@@ -73,9 +79,10 @@ class ProvidersController extends Controller
     // processes delete provider
     public function destroy(Provider $provider, Request $request)
     {
+        $name = $provider->name;
         $provider->delete();
 
-        flash()->success('Provider has been deleted!');
+        flash()->success($name . ' has been deleted!');
         return redirect('providers');
     }
 
@@ -88,5 +95,24 @@ class ProvidersController extends Controller
             'email' => 'required|unique:providers',
             'phone_num' => 'required|unique:providers|regex:/^\+?[^a-zA-Z]{5,}$/'
         ];
+    }
+
+    private function sort(Request $request)
+    {
+        // sortby = name, email
+        $sortby = $request->input('sortby');
+        $order = $request->input('order');
+        if (!$order) {
+            $order = 'asc';
+        }
+        if ($sortby) {
+            $providers = Provider::orderBy($sortby, $order)->get();
+
+        } else {
+            $sortby = null;
+            $providers = Provider::orderBy('name', $order)->get();
+        }
+
+        return ['sortby' => $sortby, 'order' => $order, 'providers' => $providers];
     }
 }

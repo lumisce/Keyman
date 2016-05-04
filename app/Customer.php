@@ -24,4 +24,21 @@ class Customer extends Model
     {
         return $this->hasMany('App\KeymanRequest');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
+    }
+
+    // sortby = total_requests, name, email
+    public function scopeOrderByName($query, $order = 'asc')
+    {
+        $query
+            ->orderBy('customers.last_name', $order);
+    }
+    public function scopeOrderByRequests($query, $order = 'asc')
+    {
+        $query
+            ->orderBy('customers.total_requests', $order);
+    }
 }

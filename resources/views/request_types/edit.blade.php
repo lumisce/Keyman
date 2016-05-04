@@ -7,11 +7,11 @@
 
 	@include('errors._list')
 
-	{!! Form::model($type, ['method' => 'PATCH', 'action' => ['TypesController@update', $type->id]]) !!}
-		@include('types._form', ['submitButtonText' => 'Update Type'])
+	{!! Form::model($type, ['method' => 'PATCH', 'action' => ['RequestTypesController@update', $type->id]]) !!}
+		@include('request_types._form', ['submitButtonText' => 'Update Type'])
 	{!! Form::close() !!}
 
-	{!! Form::open(['method' => 'DELETE', 'action' => ['TypesController@destroy', $type->id], 'class' => 'deleteForm']) !!}
+	{!! Form::open(['method' => 'DELETE', 'action' => ['RequestTypesController@destroy', $type->id], 'class' => 'deleteForm']) !!}
 		<fieldset class="form-group"> 
 			{!! Form::submit('Delete Type', ['class' => 'btn btn-danger']) !!}
 		</fieldset>

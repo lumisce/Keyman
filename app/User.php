@@ -35,6 +35,9 @@ class User extends Authenticatable
 
     public function requests()
     {
-        return $this->belongsToMany('App\KeymanRequest');
+        return $this->belongsToMany('App\KeymanRequest', 'request_users', 'user_id', 'request_id')
+            ->withPivot('progress')
+            ->withTimestamps()
+            ->orderBy('pivot_created_at', 'desc');
     }
 }

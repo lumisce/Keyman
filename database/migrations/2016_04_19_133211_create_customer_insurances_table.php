@@ -22,7 +22,6 @@ class CreateCustomerInsurancesTable extends Migration
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers');
-            $table->decimal('payment', 15, 2);
             $table->timestamps();
             $table->timestamp('valid_until');
         });
