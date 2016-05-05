@@ -20,5 +20,13 @@
 		@section('footer')
 			<script>
 				$('#type-select').select2();
+			    $(".deleteForm").on("submit", function(){
+			        if (confirm("Do you want to delete this Insurance?")) {
+			        	if(confirm("Are you sure? This will delete the insurance from customers' records. It will also delete the requests made for this insurance.")) {
+			        		return(confirm("For the last time, are you sure you want to delete this?"));
+			        	};
+			        };
+			        return false;
+			    });
 			</script>
 		@stop
