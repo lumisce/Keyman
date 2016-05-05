@@ -215,7 +215,9 @@
 						<td><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
 					@endif
 					<td>
-						@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
+						@if ($krequest->status == 'COMPLETED')
+							{{ $krequest->status }}
+						@elseif (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
 							{{ 'OVERDUE' }}
 						@elseif (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
 							{{ 'URGENT' }}
