@@ -2,7 +2,8 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>
+					<th style ="padding-bottom: 16">
+					<br />
 					@if ($sortby == 'id' && $order == 'asc') {!!
                         link_to_action(
                             $sortMethod,
@@ -26,6 +27,7 @@
                         )
                     !!}
                 	@endif
+                	<br />
 					</th>
 					@if ($showCustomer)
 						<th>
@@ -52,6 +54,8 @@
 	                        )
 	                    !!}
 	                	@endif
+	                	<br />
+                		<br />
 		                </th>
 					@endif
 					<th>
@@ -78,6 +82,8 @@
                         )
                     !!}
                 	@endif
+                	<br />
+                	<br />
 					</th>
 					<th>
 					@if ($sortby == 'type' && $order == 'asc') {!!
@@ -103,8 +109,9 @@
                         )
                     !!}
                 	@endif
+                	<br /><br />
 					</th>
-					<th>
+					<th style ="padding-bottom: 16">
 					@if ($sortby == 'turnaround' && $order == 'asc') {!!
                         link_to_action(
                             $sortMethod,
@@ -128,6 +135,7 @@
                         )
                     !!}
                 	@endif
+                	<br />
 					</th>
 					@if ($showUser)
 					<th>
@@ -154,6 +162,8 @@
 	                        )
 	                    !!}
 	                	@endif
+	                <br />
+                	<br />
 					</th>
 					@endif
 					<th>
@@ -180,12 +190,14 @@
                         )
                     !!}
                 	@endif
+                	<br />
+                	<br />
                 	</th>
-					<th>Progress</th>
-					<th>Action</th>
+					<th>Progress<br /><br /></th>
+					<th>Action<br /><br /></th>
 					<th></th>
 					@if (Auth::user()->isAdmin())
-					<th></th>
+					<th><br /><br /></th>
 					@endif
 				</tr>
 			</thead>
@@ -211,8 +223,8 @@
 							{{ $krequest->status }}
 						@endif
 					</td>
-					<td>{{ $krequest->users()->first()->pivot->progress }}</td>
-					<td>
+					<td id="progressColumn">{{ $krequest->users()->first()->pivot->progress }}</td>
+					<td style="min-width: 80px">
 						@if ($krequest->status == 'ONGOING')
 						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm']) !!}
 							<fieldset class="form-group"> 
@@ -221,7 +233,7 @@
 						{!! Form::close() !!}
 						@endif
 					</td>
-					<td>
+					<td style="min-width: 80px">
 						@if ($krequest->status == 'PENDING' && Auth::id() == $krequest->users()->first()->id)
 						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@complete', $krequest->customer->id, $krequest->id], 'class' => 'completeForm']) !!}
 							<fieldset class="form-group"> 
@@ -231,7 +243,7 @@
 						@endif
 					</td>
 					@if (Auth::user()->isAdmin())
-						<td>
+						<td style="min-width: 80px">
 							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $krequest->customer->id, $krequest->id], 'class' => 'deleteForm']) !!}
 								<fieldset class="form-group"> 
 									{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

@@ -1,0 +1,51 @@
+
+
+thead {
+	background-color: rgb(0,77,134);
+	color: white;
+	font-size: 12px;
+ 
+}
+
+th {
+	min-width: 13px;
+	padding: 24;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-family: 'Nav';
+}
+
+th > a{
+	color: white;
+}
+
+th > a:hover{
+	color: #fafafa;
+}
+
+td {
+	min-width: 100px;
+	text-align: center;
+	font-size: 12px;
+}
+td#progressColumn{
+	text-transform: uppercase;
+}
+
+.btn .btn-danger{
+	font-size: 11px;
+}
+
+.table > thead > tr > th {
+	text-align: center;
+}
+
+.row .table {
+	overflow: scroll;
+	padding: 0;
+	margin: 0 15px;
+}
+
+

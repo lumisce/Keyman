@@ -16,6 +16,17 @@ body {
     display: none;
 }
 
+.btn-primary{
+	max-width: 200px;
+	width: 50%;
+}
+
+a {
+	line-height:4px;
+}
+
+
+
 @media (max-width: 640px){
 	
 	.container_top_padding {

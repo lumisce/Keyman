@@ -11,9 +11,9 @@
 		</div></h1>
 
 		<div class="container_top_padding">
-			<a href="{{ url('/login') }}"class=" btn btn-primary">LOG IN</a>
 			<br />
-			<a href="{{ url('/register') }}"class="btn btn-link">Register</a>
+			<a href="{{ url('/login') }}"class=" btn btn-primary" style = "padding: 14px 0; font-size: 14px">LOG IN</a>
+			<br />
 		</div>
 
 @stop

@@ -40,14 +40,15 @@ h1 {
 .btn {
     align: center;
     border-radius: 0;
+    font-family: 'Nav';
+    font-size: 10.5px;
+    text-transform: uppercase;
 }
 
 .btn-primary {
-    color: white;
     background-color: rgb(233,130,51);
     border: 0;
-    padding: 14px 0;
-    width: 50%;
+
 }
 
 .fa-btn {
@@ -86,6 +87,10 @@ h1 {
     border-width: 0 0 0 8px;
     border-style: solid;
     border-color: transparent;
+    padding: 28px 2px 0 2px;
+}
+.navbar-nav { 
+    margin-top: 20px;
 }
 
 .navbar-nav>li:hover {
@@ -95,8 +100,9 @@ h1 {
 
 .navbar-default .navbar-nav>li>a {
     color: rgb(0,77,139);
-    padding: 14px 15px 14px 15px;
+    padding: 0 0 10px 0;
     font-family:'Nav';
+
 }
 
 .no-margin {
@@ -110,13 +116,18 @@ h1 {
     	height: 84px;
     }
 
+    .navbar-nav{
+        margin-top: 0;
+    }
+
     .navbar-nav>li {
     	border-width: 0 0 8px 0;
     	min-width: 120px;
     }
 
     .navbar-default .navbar-nav>li>a {
-        padding-top: 40px;
+        padding-top: 52px;
+        padding-bottom: 8px;
         text-align: center;
     }
 

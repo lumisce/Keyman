@@ -39,14 +39,14 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::check())
-                    	<li><a href="{{ url('/requests') }}">REQUESTS</a></li>
-                    	<li><a href="{{ url('/customers') }}">CUSTOMERS</a></li>
-                    	<li><a href="{{ url('/providers') }}">PROVIDERS</a></li>
+                    	<li id="requestsButton"><a href="{{ url('/requests') }}">REQUESTS</a></li>
+                    	<li id="customersButton"><a href="{{ url('/customers') }}">CUSTOMERS</a></li>
+                    	<li id="providersButton"><a href="{{ url('/providers') }}">PROVIDERS</a></li>
                     @endif
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <li><a href="{{ url('/types') }}">INS TYPES</a></li>
-                        <li><a href="{{ url('/request_types') }}">REQ TYPES</a></li>
-                    	<li><a href="{{ url('/users') }}">USERS</a></li>
+                        <li id="insTypesButton"><a href="{{ url('/types') }}">INS TYPES</a></li>
+                        <li id="reqTypesButton"><a href="{{ url('/request_types') }}">REQ TYPES</a></li>
+                    	<li id="usersButton"><a href="{{ url('/users') }}">USERS</a></li>
                     @endif
                 </ul>
 
@@ -73,7 +73,7 @@
         </div>
     </nav>
     
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 @include('flash::message')
