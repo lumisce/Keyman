@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/assets/css/requests.css">
+
+<style>
+li#customersButton{
+    border-bottom-color: rgb(232,131,52);
+    background-color: #f3f3f3;
+}
+</style>
+
+
 @section('content')
 	<h1>Customers <a href="{{ action('CustomersController@create')}}" class="btn btn-primary">Add</a></h1>
 	<hr>

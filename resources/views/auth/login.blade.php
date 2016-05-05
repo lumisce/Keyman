@@ -1,6 +1,7 @@
-@extends('layouts.app')
 
 <link rel="stylesheet" href="/assets/css/login.css">
+
+@extends('layouts.app')
 
 @section('content')
     <div class="col-sm-8 col-sm-offset-2">
@@ -43,7 +44,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <a class="btn btn-link center" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                     <div class="checkbox">
                         <label>
                              <input type="checkbox" name="remember"> Remember Me
