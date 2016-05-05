@@ -209,7 +209,7 @@
 						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->fullName  }}</a></td>
 					@endif
 					<td>{{ $krequest->insurance->name }}</td>
-					<td>{{ $krequest->type->name }}</td>
+					<td>{{ $krequest->type ? $krequest->type->name : ''}}</td>
 					<td>{{ explode(' ', $krequest->turnaround_date)[0] }}</td>
 					@if ($showUser)
 						<td><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
