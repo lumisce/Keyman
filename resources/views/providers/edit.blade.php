@@ -24,7 +24,12 @@
 @section('footer')
 	<script>
 	    $(".deleteForm").on("submit", function(){
-	        return confirm("Do you want to delete this item?");
+	        if (confirm("Do you want to delete this Provider?")) {
+	        	if(confirm("Are you sure? This will delete all Insurances of the Provider.")) {
+	        		return(confirm("For the last time, are you sure you want to delete this?"));
+	        	};
+	        };
+	        return false;
 	    });
 	</script>
 @stop

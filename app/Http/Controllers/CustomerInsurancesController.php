@@ -45,6 +45,10 @@ class CustomerInsurancesController extends Controller
     public function destroy(Customer $customer, Insurance $insurance)
     {
         $customer->insurances()->detach($insurance->id);
+        $ids = $customer->requests()->where('insurance_id', $insurance->id)->pluck('insurance_id')->all();
+        $deletedRows = $customer->requests()->whereIn('insurance_id', $ids)->delete();
+        $customer->total_requests = $customer->requests()->count();
+        $customer->save();
         flash()->success($insurance->name . ' has been removed!');
         return redirect()->route('customers.show', [$customer]);
     }
@@ -53,7 +57,6 @@ class CustomerInsurancesController extends Controller
     {
         return [
             'name' => 'required|not_in:0',
-            // 'type' => 'required|not_in:0'
         ];
     }
 }

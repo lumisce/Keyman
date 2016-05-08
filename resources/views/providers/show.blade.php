@@ -29,7 +29,7 @@
 			@foreach ($provider->insurances as $insurance)
 				<tr>
 					<td>{{ $insurance->name }}</td>
-					<td>{{ $insurance->insuranceType->name }}</td>
+					<td>{{ $insurance->insuranceType ? $insurance->insuranceType->name : '' }}</td>
 					<td>{{ $insurance->payment }}</td>
 					<td><a href="{{ action('InsurancesController@edit', [$provider->id, $insurance->id]) }}" class="btn btn-primary">Edit</a></td>
 				</tr>

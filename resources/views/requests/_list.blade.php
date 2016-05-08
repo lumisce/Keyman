@@ -385,13 +385,15 @@
 						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->fullName  }}</a></td>
 					@endif
 					<td>{{ $krequest->insurance->name }}</td>
-					<td>{{ $krequest->type->name }}</td>
+					<td>{{ $krequest->type ? $krequest->type->name : ''}}</td>
 					<td>{{ explode(' ', $krequest->turnaround_date)[0] }}</td>
 					@if ($showUser)
 						<td><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
 					@endif
 					<td>
-						@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
+						@if ($krequest->status == 'COMPLETED')
+							{{ $krequest->status }}
+						@elseif (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
 							<div style="color:red;">{{ 'OVERDUE' }}</div>
 						@elseif (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
 							<div style="color:orange">{{ 'URGENT' }}</div>

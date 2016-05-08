@@ -17,15 +17,18 @@ class CreateRequestsTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')
                 ->references('id')
-                ->on('customers');
+                ->on('customers')
+                ->onDelete('cascade');
             $table->integer('insurance_id')->unsigned();
             $table->foreign('insurance_id')
                 ->references('id')
-                ->on('insurances');
-            $table->integer('request_type_id')->unsigned();
+                ->on('insurances')
+                ->onDelete('cascade');
+            $table->integer('request_type_id')->unsigned()->nullable();
             $table->foreign('request_type_id')
                 ->references('id')
-                ->on('request_types');
+                ->on('request_types')
+                ->onDelete('set null');
             $table->string('status');
             $table->date('turnaround_date');
             $table->timestamps();

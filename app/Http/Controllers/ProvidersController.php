@@ -65,7 +65,8 @@ class ProvidersController extends Controller
     public function update(Provider $provider, Request $request)
     {
         $rules = $this->getRules();
-        $rules['email'] = 'unique:providers' . ',id,' . $provider->id;
+        $rules['name'] = 'required|unique:providers' . ',id,' . $provider->id;
+        $rules['email'] = 'required|unique:providers' . ',id,' . $provider->id;
         $rules['phone_num'] = 'required|regex:/^\+?[^a-zA-Z]{5,}$/|unique:providers' . ',id,' . $provider->id;
 
         $this->validate($request, $rules);
@@ -90,7 +91,7 @@ class ProvidersController extends Controller
     private function getRules()
     {
         return [
-            'name' => 'required|regex:/^[(a-zA-Z\s)]+$/u',
+            'name' => 'required|unique:providers',
             'location' => "regex:/[A-Za-z0-9'\.\-\s\,]/",
             'email' => 'required|unique:providers',
             'phone_num' => 'required|unique:providers|regex:/^\+?[^a-zA-Z]{5,}$/'

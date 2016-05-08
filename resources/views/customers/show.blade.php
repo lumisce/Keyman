@@ -26,7 +26,7 @@
 				<tr>
 					<td>{{ $insurance->name }}</td>
 					<td><a href="{{ action('ProvidersController@show', [$insurance->provider->id]) }}" class="">{{ $insurance->provider->name }}</a></td>
-					<td>{{ $insurance->insuranceType->name }}</td>
+					<td>{{ $insurance->insuranceType ? $insurance->insuranceType->name : '' }}</td>
 					@if (Auth::user()->isAdmin())
 						<td>
 							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'class' => 'deleteForm']) !!}
