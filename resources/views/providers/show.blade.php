@@ -37,9 +37,11 @@
 
 	<div class= "form-group" style="display: inline-flex; margin-bottom: 0;">
 			<h3 style="width: initial; font-size: 36px; margin: 0;margin-bottom: 10px;">Insurance Plans: </h3>
-			<a href={{ action('InsurancesController@create', [$provider->id]) }}" style="text-align: center; margin-top: 1%;" class="btn addButton">
-				<i>+ Add plan </i>
-			</a>
+			@if (Auth::user()->isAdmin())
+				<a href="{{ action('InsurancesController@create', [$provider->id]) }}" style="text-align: center; margin-top: 1%;" class="btn addButton">
+					<i>+ Add plan </i>
+				</a>
+			@endif
 	</div>
 
 	@unless ($provider->insurances->isEmpty())
