@@ -67,7 +67,8 @@ td#buttoncontainer ul > form > li > a{
 }
 
 thead#requestTHEad > tr > th, thead#userTHEad > tr > th,
-thead#reqTypeTHEad > tr > th, thead#insTypesTHEad > tr > th  {
+thead#reqTypeTHEad > tr > th, thead#insTypesTHEad > tr > th,
+thead#customerTHEad > tr > th, thead#providerTHEad > tr > th  {
 	vertical-align: middle;
 	font-weight: normal;
 }

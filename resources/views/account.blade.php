@@ -2,33 +2,8 @@
 
 <link rel="stylesheet" href="/assets/css/requests.css">
 <link rel="stylesheet" href="/assets/css/tablecard.css">
+<link rel="stylesheet" href="/assets/css/account.css">
 
-<style>
-thead {
-	background-color: rgb(233,130,51);
-	font-size: 12px;
-}
-
-.bgblue {
-	color: white;
-	font-size: 13px;
-	min-height: 72px;
-	display: inline-block;
-    width: 100%;
-    margin-bottom: -20px;
-}
-
-a#editButton:hover{
-	text-decoration: underline;
-}
-
-@media(max-height: 420px){
-	a#editAccountButton i{
-		display: none;
-	}
-}
-
-</style>
 
 @section('content')
 <hr>
@@ -51,9 +26,7 @@ a#editButton:hover{
 			</a>
 		</div>
 	</div>
-	<div style="margin-top: 5px; display: inline-block; float: right; width: 30px;z-index: 5;">
-		
-	</div>
+	<div style="margin-top: 5px; display: inline-block; float: right; width: 30px;z-index: 5;"></div>
 </div>
 	@include('requests._list')
 @stop
