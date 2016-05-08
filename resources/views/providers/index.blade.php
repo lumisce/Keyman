@@ -28,10 +28,10 @@
 
 	<hr>
 
-	<h3><b>providers 
+	<h3><b>providers</b></h3>
 		@if (Auth::user()->isAdmin())
 		<div class = "form-group" style="text-align:center;"><a href="{{ action('ProvidersController@create')}}" class="btn addButton"><i>+ Add Providers  </i></a></div>
-	@endif</b></h3>
+	@endif
 
 	
 
@@ -168,7 +168,7 @@
         var table_headers = [];
             tables.each(function() {
                 var th = [];
-                $(this).find('thead#providerTHead th').each(function() {
+                $(this).find('thead th').each(function() {
                 th.push($(this).text());
             });
         table_headers.push(th);
