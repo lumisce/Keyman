@@ -70,9 +70,7 @@
                                 <li id="usersButton"><a href="{{ url('/users') }}">USERS</a></li>
                             </ul>
                     @endif
-                </ul>
-
-                
+                </ul>                
             </div>
         </div>
     </nav>
