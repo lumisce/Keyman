@@ -40,8 +40,10 @@ class InsurancesController extends Controller
     public function edit(Provider $provider, Insurance $insurance)
     {
         $types = InsuranceType::pluck('name', 'id');
-        $types = $types->all();
-        $selected = $insurance->insuranceType->id;
+        $types->prepend(null, 0);
+        if ($insurance->insuranceType) {
+            $selected = $insurance->insuranceType->id;
+        }
 
         return view('insurances.edit', compact('insurance', 'types', 'selected'));
     }
@@ -62,7 +64,13 @@ class InsurancesController extends Controller
     public function destroy(Provider $provider, Insurance $insurance)
     {
         $name = $insurance->name;
+        $customers = $insurance->customers;
         $insurance->delete();
+        foreach ($customers as $customer) {
+            //detach customer insurance
+            $customer->total_requests = $customer->requests()->count();
+            $customer->save();
+        }
 
         flash()->success($name . ' has been deleted!');
         return redirect()->route('providers.show', [$provider]);

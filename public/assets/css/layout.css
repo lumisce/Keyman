@@ -28,7 +28,16 @@ h1 {
     font-size: 72px;
     text-align: center;
 }
-
+h3 {
+    font-size: 42px;
+    text-align: center;
+    vertical-align: bottom;
+}
+i, b{
+    font-style: normal;
+    font-weight: normal;
+    text-transform: uppercase;
+}
 .blue {
     color: rgb(0,77,139);
 }
@@ -39,20 +48,46 @@ h1 {
 
 .btn {
     align: center;
-    border-radius: 0;
+    border-radius: 3px;
+    font-family: 'Nav';
+    font-size: 10.5px;
+    text-transform: uppercase;
 }
 
 .btn-primary {
-    color: white;
     background-color: rgb(233,130,51);
     border: 0;
-    padding: 14px 0;
-    width: 50%;
+
 }
 
-.fa-btn {
-    margin-right: 6px;
+.dropdown-menu {
+    padding: 0;
 }
+
+.dropdown-menu > li{
+    border-left: 8px solid;
+    border-color: transparent;
+}
+
+.dropdown-menu > li:hover{
+    border-color: rgb(233,130,51);
+    background-color: #f2f2f2;
+}
+.dropdown-menu > li:focus{
+    border-color: rgb(233,130,51);
+    background-color: #f2f2f2;
+}
+
+.dropdown-menu > li > a {
+    padding: 0;
+}
+.dropdown-menu > li > a:focus {
+    background-color: #f2f2f2;
+}
+.dropdown-menu > li > a:hover {
+    background-color: #f2f2f2;
+}
+
 
 .form-control{
     border-radius: 0;
@@ -86,6 +121,7 @@ h1 {
     border-width: 0 0 0 8px;
     border-style: solid;
     border-color: transparent;
+    padding-top: 30px;
 }
 
 .navbar-nav>li:hover {
@@ -93,10 +129,17 @@ h1 {
     border-color: rgb(233,130,51);
 }
 
+.navbar-default .navbar-right>li:hover {
+    background-color: #fafafa;
+    border-color: transparent;
+
+}
+
 .navbar-default .navbar-nav>li>a {
     color: rgb(0,77,139);
-    padding: 14px 15px 14px 15px;
+    padding: 0 0 10px 0;
     font-family:'Nav';
+
 }
 
 .no-margin {
@@ -104,22 +147,42 @@ h1 {
 }
 
 
-@media (min-width: 768px) {
+@media (max-width:768px){
 
+    img#logoLarge {
+        display:none;
+    }
+}
+
+@media (min-width: 768px){
+    b {
+        display: none;
+    }
+    img#logoSmall {
+        display:none;
+    }
+}
+
+@media (max-width: 1000px){
+   .navbar-default .navbar-nav>li>a>i#i{
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
     .navbar {
     	height: 84px;
     }
-
     .navbar-nav>li {
     	border-width: 0 0 8px 0;
     	min-width: 120px;
     }
 
     .navbar-default .navbar-nav>li>a {
-        padding-top: 40px;
+        padding-top: 52px;
+        padding-bottom: 8px;
         text-align: center;
     }
-
 }
 
 @media (min-width: 992px) {
@@ -129,6 +192,11 @@ h1 {
         padding-right: 2px;
     }
 }
+
+.alert {
+    margin-top: 5%;
+}
+
 
 
 

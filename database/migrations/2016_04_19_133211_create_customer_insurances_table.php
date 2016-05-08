@@ -17,11 +17,13 @@ class CreateCustomerInsurancesTable extends Migration
             $table->integer('insurance_id')->unsigned();
             $table->foreign('insurance_id')
                 ->references('id')
-                ->on('insurances');
+                ->on('insurances')
+                ->onDelete('cascade');
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')
                 ->references('id')
-                ->on('customers');
+                ->on('customers')
+                ->onDelete('cascade');
             $table->timestamps();
             $table->timestamp('valid_until');
         });

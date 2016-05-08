@@ -79,7 +79,7 @@ class AuthController extends Controller
         $rules = $this->getRules();
         $this->validate($request, $rules);
 
-        $user = User::create($request->all());
+        $user = $this->create($request->all());
 
         flash()->success($user->name . ' has been registered!');
         return redirect('users');
@@ -108,8 +108,9 @@ class AuthController extends Controller
         $rules['name'] = 'required|max:255|unique:users' . ',id,' . \Auth::id();
         $rules['email'] = 'required|email|max:255|unique:users' . ',id,' . \Auth::id();
         $rules['phone_num'] = 'required|numeric|unique:users' . ',id,' . \Auth::id();
-
         $this->validate($request, $rules);
+
+        $request['password'] = bcrypt($request['password']);
         \Auth::user()->update($request->all());
 
         flash()->success('Account has been updated!');
