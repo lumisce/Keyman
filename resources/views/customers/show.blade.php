@@ -67,4 +67,5 @@
 	<div id ="add" class= "form-group" style="display: inline-flex; margin-bottom: 0;">
 	<h3 style="width: initial; font-size: 36px; margin: 0;margin-bottom: -20px;">Requests: {{ $customer->total_requests }}</h3><a href="{{ action('RequestsController@create', [$customer->id])}}" style="text-align: center; margin-top: 2%;" class="btn addButton"> <i>+ Add Request </i></a></div>
 	@include('requests._list')
+	<hr>
 @stop

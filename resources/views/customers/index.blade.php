@@ -196,6 +196,7 @@
 				</tr>
 			@endforeach
 		</table>
+        <hr>
 	@endunless
 @stop
 @section('footer')

@@ -55,6 +55,7 @@
 				</tr>
 			@endforeach
 		</table>
+		<hr>
 	@endunless
 @stop
 

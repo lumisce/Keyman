@@ -16,4 +16,5 @@ li#requestsButton{
 	<hr>
 	<b><h3>requests</h3></b>
 	@include('requests._list')
+	<hr>
 @stop

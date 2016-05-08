@@ -30,4 +30,5 @@
 			</tr>
 		@endforeach
 	</table>
+	<hr>
 @stop

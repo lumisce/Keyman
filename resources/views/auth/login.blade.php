@@ -51,6 +51,8 @@
                         </label>
                     </div>
                 </div>
+                <br />
+                <br />
 
                 <div class="form-group center">
                     <div class="col-sm-8 col-sm-offset-2">

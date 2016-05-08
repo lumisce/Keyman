@@ -34,6 +34,7 @@
 			</tr>
 		@endforeach
 	</table>
+	<hr>
 @stop
 
 @section('footer')
