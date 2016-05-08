@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                   <!--  <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a> -->
                     <div class="checkbox">
                         <label>
                              <input type="checkbox" name="remember"> Remember Me
