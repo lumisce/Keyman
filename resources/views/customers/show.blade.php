@@ -18,7 +18,7 @@
 
 			<div id ="add" style="display: inline-table; float: left; margin: 10px;">
 				<div class="upper" style="font-size: 18px">
-					{{$customer->fullName }} 
+					{{ $customer->last_name  }}, {{ $customer->first_name  }} {{ $customer->middle_name  }}
 				</div>
 				{{ $customer->email }}<br />
 				{{ $customer->phone_num }}<br />

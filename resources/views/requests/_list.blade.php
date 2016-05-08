@@ -382,7 +382,11 @@
 				<tr id ="override">
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					@if ($showCustomer)
-						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->fullName  }}</a></td>
+						<td>
+							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
+								{{ $krequest->customer->last_name  }}, {{ $krequest->customer->first_name  }} {{ $krequest->customer->middle_name[0]  }}.
+							</a>
+						</td>
 					@endif
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type ? $krequest->type->name : ''}}</td>
