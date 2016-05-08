@@ -207,12 +207,12 @@
 
 			<tr id="override">
 
-				<td>
+				<td style="text-align: left">
                     <a href="{{ action('CustomersController@show', [$customer->id]) }}" class="">
-                        {{ $customer->last_name  }}, {{ $customer->first_name  }} {{ $customer->middle_name[0]  }}.
+                        <span style="text-transform: uppercase;">{{ $customer->last_name  }}</span>, {{ $customer->first_name  }} {{ $customer->middle_name[0] }}.
                     </a>
                 </td>
-				<td>{{ $customer->email }}</td>
+				<td style="text-align: left;">{{ $customer->email }}</td>
 				<td>{{ $customer->phone_num }}</td>
 				<td>{{ $customer->total_requests }}</td>
 				@if (Auth::user()->isAdmin())

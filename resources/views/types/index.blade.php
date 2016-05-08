@@ -30,14 +30,14 @@
 	<table class="table table-hover">
 		<thead id ="insTypesTHead">
 			<tr>
-				<th>Name</th>
+				<th>Insurance type</th>
 				<th></th>
 			</tr>
 		</thead>
 
 		@foreach ($types as $type)
 			<tr id ="override">
-			 	<td>{{ $type->name }}</td>
+			 	<td> {{ $type->name }}</td>
 				<td><a href="{{ action('TypesController@edit', [$type->id]) }}" class="btn btn-primary">Edit</a></td>
 			</tr>
 		@endforeach

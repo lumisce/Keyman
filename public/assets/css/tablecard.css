@@ -1,4 +1,8 @@
 
+	.ulbutton {
+		float: right;
+	}
+
 @media (max-width: 1200px){
 	.table{
 		margin: 0 auto;
@@ -52,6 +56,10 @@
 		display: inline;	
 		max-height: 20px;
 		margin-bottom: 0;
+	}
+
+	.ulbutton {
+		float: left;
 	}
 
 	td#buttoncontainer >td:before{
