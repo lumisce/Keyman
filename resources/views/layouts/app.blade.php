@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/css/vendor/tether.css">
     <link rel="stylesheet" href="/assets/css/vendor/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/vendor/select2.css">
-     <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 </head>
@@ -30,27 +30,12 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/browse') }}">
-                    <img src="/assets/images/KeymanLogo.png" style="height:60px;">
-                </a>
+                <img id="logoSmall" src="/assets/images/KeymanLogo2.png" style="height:33px; width: 55px; padding-right: 20px; margin: 20px 0 10px 10px;">
+                <img id="logoLarge" src="/assets/images/Logo_KIS.png" style="height:100px; padding-right: 20px; margin-top: 20px; margin-left: 10px;">
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    @if (Auth::check())
-                    	<li id="requestsButton"><a href="{{ url('/requests') }}">REQUESTS</a></li>
-                    	<li id="customersButton"><a href="{{ url('/customers') }}">CUSTOMERS</a></li>
-                    	<li id="providersButton"><a href="{{ url('/providers') }}">PROVIDERS</a></li>
-                    @endif
-                    @if (Auth::check() && Auth::user()->isAdmin())
-                        <li id="insTypesButton"><a href="{{ url('/types') }}">INS TYPES</a></li>
-                        <li id="reqTypesButton"><a href="{{ url('/request_types') }}">REQ TYPES</a></li>
-                    	<li id="usersButton"><a href="{{ url('/users') }}">USERS</a></li>
-                    @endif
-                </ul>
-
-                <!-- Right Side Of Navbar -->
+            <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -58,8 +43,8 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <a href="#" class="dropdown-toggle" id="usernameMenu" data-toggle="dropdown" role="button" aria-expanded="false" style ="text-transform: uppercase;">
+                                <i id="i">{{ Auth::user()->name }}</i> <i class="fa fa-btn fa-user fa-lg"> </i>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -69,6 +54,25 @@
                         </li>
                     @endif
                 </ul>
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    @if (Auth::check())
+                    	<li id="requestsButton"><a href="{{ url('/requests') }}">REQUESTS</a></li>
+                    	<li id="customersButton"><a href="{{ url('/customers') }}">CUSTOMERS</a></li>
+                    	<li id="providersButton"><a href="{{ url('/providers') }}">PROVIDERS</a></li>
+                    @endif
+                    @if (Auth::check() && Auth::user()->isAdmin())
+                        <li id="adminButton" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMIN<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li id="insTypesButton"><a href="{{ url('/types') }}">INS TYPES</a></li>
+                                <li id="reqTypesButton"><a href="{{ url('/request_types') }}">REQ TYPES</a></li>
+                                <li id="usersButton"><a href="{{ url('/users') }}">USERS</a></li>
+                            </ul>
+                    @endif
+                </ul>
+
+                
             </div>
         </div>
     </nav>
