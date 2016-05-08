@@ -392,11 +392,19 @@
 					@endif
 					<td>
 						@if ($krequest->status == 'COMPLETED')
-							{{ $krequest->status }}
-						@elseif (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
-							<div style="color:red;">{{ 'OVERDUE' }}</div>
-						@elseif (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
-							<div style="color:orange">{{ 'URGENT' }}</div>
+							<div style="color: green;">{{ $krequest->status }}</div>
+						@elseif ($krequest->status == 'PENDING')
+							@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
+							<div style="color: red;">{{ 'OVERDUE' }}</div>
+							@else
+							<div style="color: orange;">{{ $krequest->status }}</div>
+							@endif
+						@elseif ($krequest->status == 'ONGOING')
+							@if (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
+								<div style="color: #ff5719">{{ 'URGENT' }}</div>
+							@else
+								<div style="color: #00e2e2">{{ $krequest->status }}</div>
+							@endif
 						@else
 							{{ $krequest->status }}
 						@endif
