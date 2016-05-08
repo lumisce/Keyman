@@ -1,0 +1,85 @@
+
+@media (max-width: 1200px){
+	.table{
+		margin: 0 auto;
+	}
+
+
+	thead#requestTHead, thead#customerTHead,
+	thead#providerTHead, thead#userTHead {
+    	display: none;
+	}
+
+	tr {
+		display: block;
+    	margin: auto;
+    	margin-bottom: 10px;
+    	padding: 20px 20px 0 20px;
+	}
+
+	tbody > tr {
+		background-color: #f0f0f0;
+	}
+
+	td {
+    	display: block;
+    	margin: 0 0.5rem 0.5rem 0;
+    	padding: 0.5rem;
+  		text-align: left;
+	}
+
+	tr#override > td{
+		border-width: 0px;
+		width: 100%;
+		display: inline-table;
+		margin:0;
+		margin-bottom: 10px;
+	}
+
+	@media (min-width: 480px) {
+		tr#override > td:nth-child(even){
+			float:right;
+		}
+		tr#override > td:nth-child(odd){
+			left: 0;
+		}
+		tr#override > td{
+			width: 50%;
+		}
+	}
+
+
+	td#buttoncontainer {
+		display: inline;	
+		max-height: 20px;
+		margin-bottom: 0;
+	}
+
+	td#buttoncontainer >td:before{
+		content: none;	
+	}
+
+	td:before {
+    	float: left;
+    	margin: -0.5rem 0.5rem -0.5rem -0.5rem;
+    	padding: 0.625rem 0.5rem 0.625rem;
+    	font-size: 12px;
+    	text-transform: uppercase;
+    	color: rgb(233,130,51);
+    }
+
+	td:before {
+    	content: attr(data-label) ": ";
+    	width: 100%;
+    	display: block;
+    }
+
+    td#buttonContainer:before {
+    	content: "";
+    }
+
+    .title {
+    	display:flex;
+    	float: left;
+    }
+}
