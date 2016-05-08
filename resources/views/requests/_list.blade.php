@@ -382,7 +382,11 @@
 				<tr id ="override">
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					@if ($showCustomer)
-						<td><a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">{{ $krequest->customer->fullName  }}</a></td>
+						<td>
+							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
+								{{ $krequest->customer->last_name  }}, {{ $krequest->customer->first_name  }} {{ $krequest->customer->middle_name[0]  }}.
+							</a>
+						</td>
 					@endif
 					<td>{{ $krequest->insurance->name }}</td>
 					<td>{{ $krequest->type ? $krequest->type->name : ''}}</td>
@@ -392,11 +396,19 @@
 					@endif
 					<td>
 						@if ($krequest->status == 'COMPLETED')
-							{{ $krequest->status }}
-						@elseif (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
-							<div style="color:red;">{{ 'OVERDUE' }}</div>
-						@elseif (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
-							<div style="color:orange">{{ 'URGENT' }}</div>
+							<div style="color: green;">{{ $krequest->status }}</div>
+						@elseif ($krequest->status == 'PENDING')
+							@if (Carbon\Carbon::now()->startOfDay()->gt($krequest->turnaround_date))
+							<div style="color: red;">{{ 'OVERDUE' }}</div>
+							@else
+							<div style="color: orange;">{{ $krequest->status }}</div>
+							@endif
+						@elseif ($krequest->status == 'ONGOING')
+							@if (Carbon\Carbon::now()->startOfDay()->eq($krequest->turnaround_date))
+								<div style="color: #ff5719">{{ 'URGENT' }}</div>
+							@else
+								<div style="color: #00e2e2">{{ $krequest->status }}</div>
+							@endif
 						@else
 							{{ $krequest->status }}
 						@endif

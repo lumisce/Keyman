@@ -1,7 +1,11 @@
+a#editButton:hover{
+	text-decoration: underline;
+}
 
-thead {
-	background-color: rgb(233,130,51);
-	font-size: 12px;
+@media(max-height: 420px){
+	a#editAccountButton i{
+		display: none;
+	}
 }
 
 .bgblue {
@@ -13,12 +17,7 @@ thead {
     margin-bottom: -20px;
 }
 
-a#editButton:hover{
-	text-decoration: underline;
-}
-
-@media(max-height: 420px){
-	a#editAccountButton i{
-		display: none;
-	}
+thead {
+	background-color: rgb(233,130,51);
+	font-size: 12px;
 }

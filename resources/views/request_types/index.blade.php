@@ -1,22 +1,31 @@
 @extends('layouts.app')
+
 <link rel="stylesheet" href="/assets/css/requests.css">
 <link rel="stylesheet" href="/assets/css/tablecard-sm.css">
+
 <style>
+
     li#adminButton{
         border-bottom-color: rgb(232,131,52);
         background-color: #f3f3f3;
     }
+
     li#reqTypesButton{
-        border-left-color: rgb(232,131,52);
+        border-left-color: rgb(232,131,52); 
         background-color: #f3f3f3;
     }
+
 </style>
 
 
 @section('content')
 	<hr>
 		<h3 style=" margin-left: 5px;"  >Request Types</h3>
-		    <div class = "form-group" style="text-align:center;"><a href="{{ action('RequestTypesController@create' )}}" class="btn addButton"><i>+ Add Types  </i></a></div>
+		    <div class = "form-group" style="text-align: center">
+		    	<a href="{{ action('RequestTypesController@create' )}}" class="btn addButton">
+		    		<i>+ Add Types  </i>
+		    	</a>
+		    </div>
 
 	<table class="table table-hover cards-table" id ="small">
 		<thead id="reqTypeTHead">
@@ -26,11 +35,16 @@
 				<th></th>
 			</tr>
 		</thead>
+
 		@foreach ($types as $type)
 			<tr id ="override">
 				<td>{{ $type->name }}</td>
 				<td>{{ $type->ideal_turnaround . ' day' }}{{ $type->ideal_turnaround == 1 ? '' : 's'}}</td>
-				<td id ="buttonContainer"><a href="{{ action('RequestTypesController@edit', [$type->id]) }}" class="btn btn-primary">EDIT <i class ="fa fa-btn fa-edit fa-lg"></i></a></td>
+				<td id ="buttonContainer">
+					<a href="{{ action('RequestTypesController@edit', [$type->id]) }}" class="btn btn-primary">
+						EDIT <i class ="fa fa-btn fa-edit fa-lg"></i>
+					</a>
+				</td>
 			</tr>
 		@endforeach
 	</table>
@@ -50,8 +64,6 @@
 	    });
 
 	    var tables = $('.cards-table');
-
-			// Create an array containing all table headers
 		var table_headers = [];
 			tables.each(function() {
     			var th = [];
@@ -59,17 +71,11 @@
        			th.push($(this).text());
     		});
     	table_headers.push(th);
-
 		});
 
-	// Add a data-label attribute to each cell
-	// with the value of the corresponding column header
-	// Iterate through each table
 		tables.each(function(table) {
     		var table_index = table;
-    		// Iterate through each row
     		$(this).find('tbody tr').each(function() {
-        	// Finally iterate through each column/cell
         		$(this).find('td').each(function(column) {
             	$(this).attr('data-label', table_headers[table_index][column]);
         		});

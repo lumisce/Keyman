@@ -28,7 +28,7 @@
 	</div>
 	<div style="margin-top: 5px; display: inline-block; float: right; width: 30px;z-index: 5;"></div>
 </div>
-	@include('requests._list')
+@include('requests._list')
 <hr>
 @stop
 
