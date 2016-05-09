@@ -43,10 +43,6 @@ li#adminButton > a:focus{
     background-color: #f3f3f3;
 }
 
-.alert {
-    margin-top: 5%;
-}
-
 .blue {
     color: rgb(0,77,139);
 }
@@ -159,7 +155,7 @@ li#adminButton > a:focus{
     color: #ffffff;
     border-radius: 0;
     width:80%;
-    margin: auto;
+    margin: 4.7% auto auto;
 }
 
 .alert-success{
