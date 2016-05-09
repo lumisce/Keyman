@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="/assets/css/requests.css">
 <link rel="stylesheet" href="/assets/css/tablecard.css">
-
+ 
 <style>
 
     li#customersButton{
@@ -23,6 +23,11 @@
 
     .form-group {
         margin-left: -8px;
+    }
+
+    .fa{
+        padding: 0;
+        margin: 0;
     }
 
 </style>
@@ -54,6 +59,21 @@
                             ]
                         )
                     !!}
+                     <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                    @elseif ($sortby == 'name' && $order == 'desc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Name',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'name',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+
                     @else {!!
                         link_to_action(
                             $sortMethod,
@@ -78,6 +98,22 @@
                             ]
                         )
                     !!}
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                    @elseif ($sortby == 'email' && $order == 'desc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Email',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'email',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    
                     @else {!!
                         link_to_action(
                             $sortMethod,
@@ -102,6 +138,22 @@
                             ]
                         )
                     !!}
+
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                    @elseif ($sortby == 'requests' && $order == 'desc') {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Requests',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'requests',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    
                     @else {!!
                         link_to_action(
                             $sortMethod,
@@ -123,76 +175,130 @@
 			<tr>
 				<th>
 					@if ($sortby == 'name' && $order == 'asc') {!!
+                            link_to_action(
+                                $sortMethod,
+                                'Name',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'name',
+                                    'order' => 'desc',
+                                ]
+                            )
+                        !!}
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                    @elseif ($sortby == 'name' && $order == 'desc') {!!
                         link_to_action(
                             $sortMethod,
                             'Name',
                             [
-                                'sortby' => 'name',
-                                'order' => 'desc',
-                            ]
-                        )
-                    !!}
-                    @else {!!
-                        link_to_action(
-                            $sortMethod,
-                            'Name',
-                            [
+                                isset($attach) ? $attach : null,
                                 'sortby' => 'name',
                                 'order' => 'asc',
                             ]
                         )
                     !!}
-            	   @endif
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                
+                    @else
+                     {!!
+                        link_to_action(
+                            $sortMethod,
+                            'Name',
+                            [
+                                isset($attach) ? $attach : null,
+                                'sortby' => 'name',
+                                'order' => 'asc',
+                            ]
+                        )
+                    !!}
+                    @endif
 				</th>
 
-				<th>
+				<th style="margin: 0">
 					@if ($sortby == 'email' && $order == 'asc') {!!
-                        link_to_action(
-                            $sortMethod,
-                            'Email',
-                            [
-                                'sortby' => 'email',
-                                'order' => 'desc',
-                            ]
-                        )
-                    !!}
-                    @else {!!
-                        link_to_action(
-                            $sortMethod,
-                            'Email',
-                            [
-                                'sortby' => 'email',
-                                'order' => 'asc',
-                            ]
-                        )
-                    !!}
-                	@endif
+                            link_to_action(
+                                $sortMethod,
+                                'Email',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'email',
+                                    'order' => 'desc',
+                                ]
+                            )
+                        !!}
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                        @elseif ($sortby == 'email' && $order == 'desc') {!!
+                            link_to_action(
+                                $sortMethod,
+                                'Email',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'email',
+                                    'order' => 'asc',
+                                ]
+                            )
+                        !!}
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    
+                        @else
+                         {!!
+                            link_to_action(
+                                $sortMethod,
+                                'Email',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'email',
+                                    'order' => 'asc',
+                                ]
+                            )
+                        !!}
+                        @endif
             	</th>
 
 				<th>Phone</th>
 
 				<th>
 					@if ($sortby == 'requests' && $order == 'asc') {!!
-                        link_to_action(
-                            $sortMethod,
-                            'Requests',
-                            [
-                                'sortby' => 'requests',
-                                'order' => 'desc',
-                            ]
-                        )
-                    !!}
-                    @else {!!
-                        link_to_action(
-                            $sortMethod,
-                            'Requests',
-                            [
-                                'sortby' => 'requests',
-                                'order' => 'asc',
-                            ]
-                        )
-                    !!}
-                	@endif
+                            link_to_action(
+                                $sortMethod,
+                                'Requests',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'requests',
+                                    'order' => 'desc',
+                                ]
+                            )
+                        !!}
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+
+                        @elseif ($sortby == 'requests' && $order == 'desc') {!!
+                            link_to_action(
+                                $sortMethod,
+                                'Requests',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'requests',
+                                    'order' => 'asc',
+                                ]
+                            )
+                        !!}
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    
+                        @else
+                         {!!
+                            link_to_action(
+                                $sortMethod,
+                                'Requests',
+                                [
+                                    isset($attach) ? $attach : null,
+                                    'sortby' => 'requests',
+                                    'order' => 'asc',
+                                ]
+                            )
+                        !!}
+                        @endif
             	</th>
 
 				@if (Auth::user()->isAdmin())

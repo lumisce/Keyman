@@ -4,6 +4,18 @@
 	}
 }
 
+.fa-caret-up {
+	padding-bottom: 2%;
+    margin-left: 1%;
+    float-left;
+}
+
+.fa-caret-down {
+	margin-top: 3%;
+	margin-left: 1%;
+    float-left;
+}
+
 li {
 	padding: 8px 15px;
 }
@@ -22,6 +34,17 @@ thead {
 	color: white;
 	text-transform: uppercase;
 	font-family: 'Nav';
+}
+
+div#requestTHeadSort > ul > li{
+	text-transform: uppercase;
+	font-size: 11px;
+	display: inline-flex;
+	width: 100%;
+}
+
+div#requestTHeadSort > ul > li >a{
+	color: rgb(23,92,114);
 }
 
 thead#requestTHEad > tr > th, thead#userTHEad > tr > th,
@@ -69,11 +92,8 @@ td#buttoncontainer ul > form > li {
 }
 td#buttoncontainer ul > form > li .btn {
 	min-height: 29px;
-    min-width: 75px;
-}
-
-td#buttoncontainer ul > form > li .btn-primary{
-	width: 87px;
+    min-width: 70px;
+    padding: 2px;
 }
 
 td#buttoncontainer ul > form > li > a{
