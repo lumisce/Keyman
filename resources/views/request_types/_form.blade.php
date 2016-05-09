@@ -6,19 +6,17 @@
 		    width: 50%;
 		}
 	</style>
-		<fieldset class="form-group">
+		<fieldset class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 			{!! Form::label('name', 'Name:', ['class' => 'label-requests col-xs-6']) !!}
 			{!! Form::text('name', null, ['class' => 'col-sm-6 form-control']) !!}
 		</fieldset>
 
-		<fieldset class="form-group">
-			
+		<fieldset class="form-group{{ $errors->has('ideal_turnaround') ? ' has-error' : '' }}">
 			{!! Form::label('ideal_turnaround', 'Ideal Turnaround (days):', ['class' => 'label-requests col-xs-6']) !!}
 			{!! Form::input('number', 'ideal_turnaround', $type->ideal_turnaround ? $type->ideal_turnaround : 1, ['class' => 'col-sm-6 form-control']) !!}
 		</fieldset>
 
 		<fieldset class="form-group"> 
-
 			{!! Form::label('', '', ['class' => 'label-requests col-sm-6 col-sm-3 col-sm-offset-6']) !!}
 			{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 		</fieldset>
