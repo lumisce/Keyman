@@ -209,7 +209,7 @@
 
 				<td>
                     <a href="{{ action('CustomersController@show', [$customer->id]) }}" class="">
-                        {{ $customer->last_name  }}, {{ $customer->first_name  }} {{ $customer->middle_name[0]  }}.
+                        {{ $customer->fullNameMI }}
                     </a>
                 </td>
 				<td>{{ $customer->email }}</td>

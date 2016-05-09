@@ -384,7 +384,7 @@
 					@if ($showCustomer)
 						<td>
 							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
-								{{ $krequest->customer->last_name  }}, {{ $krequest->customer->first_name  }} {{ $krequest->customer->middle_name[0]  }}.
+								{{ $krequest->customer->fullNameMI }}
 							</a>
 						</td>
 					@endif
