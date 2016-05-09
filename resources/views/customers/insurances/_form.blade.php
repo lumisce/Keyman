@@ -7,7 +7,7 @@
  --}}
 		<fieldset class="form-group">
 			{!! Form::label('name', 'Plan:', ['class' => 'label-requests col-md-3']) !!}
-			{!! Form::select('name', $plans, isset($selPlan) ? $selPlan : 0, ['class' => 'form-control col-md-9', 'id' => 'plan-select']) !!}
+			{!! Form::select('name', $plans, isset($selPlan) ? $selPlan : 0, ['class' => 'form-control col-md-9']) !!}
 		</fieldset>
 
 		<fieldset class="form-group">
