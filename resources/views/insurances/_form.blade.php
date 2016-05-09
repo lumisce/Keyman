@@ -1,22 +1,24 @@
+<link rel="stylesheet" href="/assets/css/add-edit.css">
 		<fieldset class="form-group">
-			{!! Form::label('name', 'Name:') !!}
-			{!! Form::text('name', null, ['class' => 'form-control']) !!}
+			{!! Form::label('name', 'Name:', ['class' => 'label-requests col-xs-3']) !!}
+			{!! Form::text('name', null, ['class' => 'col-sm-9 form-control']) !!}
 		</fieldset>
 
 		<fieldset class="form-group">
-			{!! Form::label('type', 'Type:') !!}
-			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'form-control', 'id' => 'type-select']) !!}
+			{!! Form::label('type', 'Type:', ['class' => 'label-requests col-xs-3']) !!}
+			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control', 'id' => 'type-select']) !!}
 		</fieldset>
 		
 		<fieldset class="form-group">
-			{!! Form::label('payment', 'Price:') !!}
-			{!! Form::input('number', 'payment', $insurance->payment ? $insurance->payment : 0.00, ['class' => 'form-control', 'step' => '0.01']) !!}
+			{!! Form::label('payment', 'Price:', ['class' => 'label-requests col-xs-3']) !!}
+			{!! Form::input('number', 'payment', $insurance->payment ? $insurance->payment : 0.00, ['class' => 'col-sm-9 form-control', 'step' => '0.01']) !!}
 		</fieldset>
 
-		<fieldset class="form-group"> 
+		<fieldset class="form-group">
+			{!! Form::label('', '', ['class' => 'label-requests col-sm-6 col-sm-3 col-sm-offset-6']) !!} 
 			{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 		</fieldset>
-
+		
 		@section('footer')
 			<script>
 				$('#type-select').select2();
