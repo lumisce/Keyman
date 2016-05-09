@@ -11,7 +11,6 @@
     }
 
     li#reqTypesButton{
-        border-left-color: rgb(232,131,52); 
         background-color: #f3f3f3;
     }
 
