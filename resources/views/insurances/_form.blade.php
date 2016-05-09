@@ -6,7 +6,7 @@
 
 		<fieldset class="form-group">
 			{!! Form::label('type', 'Type:', ['class' => 'label-requests col-xs-3']) !!}
-			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control', 'id' => 'type-select']) !!}
+			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control']) !!}
 		</fieldset>
 		
 		<fieldset class="form-group">
