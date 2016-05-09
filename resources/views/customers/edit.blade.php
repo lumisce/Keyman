@@ -1,20 +1,29 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/assets/css/add-edit.css">
+
 @section('content')
-	<h1>Edit: {!! $customer->fullName  !!}</h1>
-	
 	<hr>
 
 	@include('errors._list')
 
+	<div class="col-sm-6 col-sm-3 col-sm-offset-2">
+		<div class="title-box">
+			<center>Edit: {!! $customer->fullName  !!}</center>
+		</div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class= "panel panel-default">
+
 	{!! Form::model($customer, ['method' => 'PATCH', 'action' => ['CustomersController@update', $customer->id]]) !!}
-		@include('customers._form', ['submitButtonText' => 'Update Customer'])
+		@include('customers._form', ['submitButtonText' => 'Update'])
 	{!! Form::close() !!}
 
 	@if (Auth::user()->isAdmin())
 		{!! Form::open(['method' => 'DELETE', 'action' => ['CustomersController@destroy', $customer->id], 'class' => 'deleteForm']) !!}
-			<fieldset class="form-group"> 
-				{!! Form::submit('Delete Customer', ['class' => 'btn btn-danger']) !!}
+			<fieldset class="form-group" style="padding-top: 0;">
+				{!! Form::label('', '', ['class' => 'label-requests col-sm-6 col-sm-3 col-sm-offset-6']) !!}
+				{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 			</fieldset>
 		{!! Form::close() !!}
 	@endif

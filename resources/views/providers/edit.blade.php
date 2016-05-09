@@ -1,24 +1,33 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/assets/css/add-edit.css">
+
 @section('content')
-	<h1>Edit: {!! $provider->name !!}</h1>
-	
 	<hr>
 
 	@include('errors._list')
 
-	{!! Form::model($provider, ['method' => 'PATCH', 'action' => ['ProvidersController@update', $provider->id]]) !!}
-		@include('providers._form', ['submitButtonText' => 'Update Provider'])
-	{!! Form::close() !!}
+	<div class="col-sm-6 col-sm-3 col-sm-offset-2">
+		<div class="title-box">
+			<center>Edit: {!! $provider->name !!}</center>
+		</div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class= "panel panel-default">
+			{!! Form::model($provider, ['method' => 'PATCH', 'action' => ['ProvidersController@update', $provider->id]]) !!}
+				@include('providers._form', ['submitButtonText' => 'Update'])
+			{!! Form::close() !!}
 
-	@if (Auth::user()->isAdmin())
-		{!! Form::open(['method' => 'DELETE', 'action' => ['ProvidersController@destroy', $provider->id], 'class' => 'deleteForm']) !!}
-			<fieldset class="form-group"> 
-				{!! Form::submit('Delete Provider', ['class' => 'btn btn-danger']) !!}
-			</fieldset>
-		{!! Form::close() !!}
-	@endif
-
+			@if (Auth::user()->isAdmin())
+				{!! Form::open(['method' => 'DELETE', 'action' => ['ProvidersController@destroy', $provider->id], 'class' => 'deleteForm']) !!}
+					<fieldset class="form-group" style="padding-top: 0;">
+						{!! Form::label('', '', ['class' => 'label-requests col-sm-6 col-sm-3 col-sm-offset-6']) !!} 
+						{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+					</fieldset>
+				{!! Form::close() !!}
+			@endif
+		</div>
+	</div>
 @stop
 
 @section('footer')
