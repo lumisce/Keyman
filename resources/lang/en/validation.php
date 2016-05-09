@@ -108,6 +108,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'phone_num' => 'phone number',
+        'payment' => 'price',
+
+    ],
 
 ];
