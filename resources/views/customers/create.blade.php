@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
-@section('content')
-	<h1>Add a New Customer</h1>
+<link rel="stylesheet" href="/assets/css/add-edit.css">
 
+@section('content')
 	<hr>
 
 	@include('errors._list')
-
-	{!! Form::model($customer = new \App\Customer, ['url' => 'customers']) !!}
-		@include('customers._form', ['submitButtonText' => 'Add Customer'])
-	{!! Form::close() !!}
-
+	<div class="col-sm-6 col-sm-3 col-sm-offset-2">
+		<div class="title-box">
+			<center>Add New Customer</center>
+		</div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class= "panel panel-default">
+			{!! Form::model($customer = new \App\Customer, ['url' => 'customers']) !!}
+				@include('customers._form', ['submitButtonText' => 'Add'])
+			{!! Form::close() !!}
+		</div>
+	</div>
 @stop
