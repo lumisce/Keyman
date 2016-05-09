@@ -39,10 +39,7 @@
             <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
+                    @if (Auth::check())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="usernameMenu" data-toggle="dropdown" role="button" aria-expanded="false" style ="text-transform: uppercase;">
                                 <i id="i">{{ Auth::user()->name }}</i> <i class="fa fa-btn fa-user fa-lg"> </i>
