@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/assets/css/add-edit.css">
+
 @section('content')
-	<h1>Add a New Request to {{ $customer->fullName }}</h1>
-
 	<hr>
-
 	@include('errors._list')
-
-	{!! Form::model($krequest = new \App\KeymanRequest, ['action' => ['RequestsController@store', $customer->id]]) !!}
-		@include('customers.requests._form', ['submitButtonText' => 'Add Request'])
-	{!! Form::close() !!}
+	<div class="col-sm-6 col-sm-3 col-sm-offset-2">
+		<div class="title-box">
+			<center>Add a New Request to {{ $customer->fullName }}</center>
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class= "panel panel-default">
+			{!! Form::model($krequest = new \App\KeymanRequest, ['action' => ['RequestsController@store', $customer->id]]) !!}
+				@include('customers.requests._form', ['submitButtonText' => 'Add'])
+			{!! Form::close() !!}
+		</div>
+	</div>
 
 @stop
 
