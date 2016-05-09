@@ -1,21 +1,29 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/assets/css/add-edit.css">
+
 @section('content')
-	<h1>Edit: {!! $type->name !!}</h1>
-	
 	<hr>
 
 	@include('errors._list')
-
-	{!! Form::model($type, ['method' => 'PATCH', 'action' => ['RequestTypesController@update', $type->id]]) !!}
-		@include('request_types._form', ['submitButtonText' => 'Update Type'])
-	{!! Form::close() !!}
-
-	{!! Form::open(['method' => 'DELETE', 'action' => ['RequestTypesController@destroy', $type->id], 'class' => 'deleteForm']) !!}
-		<fieldset class="form-group"> 
-			{!! Form::submit('Delete Type', ['class' => 'btn btn-danger']) !!}
-		</fieldset>
-	{!! Form::close() !!}
+	<div class="col-sm-6 col-sm-3 col-sm-offset-2">
+		<div class="title-box">
+			<center>Edit: {!! $type->name !!}</center>
+		</div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class= "panel panel-default">
+			{!! Form::model($type, ['method' => 'PATCH', 'action' => ['RequestTypesController@update', $type->id]]) !!}
+				@include('request_types._form', ['submitButtonText' => 'Update'])
+			{!! Form::close() !!}
+			{!! Form::open(['method' => 'DELETE', 'action' => ['RequestTypesController@destroy', $type->id], 'class' => 'deleteForm']) !!}
+				<fieldset class="form-group" style="padding-top: 0;">
+					{!! Form::label('', '', ['class' => 'label-requests col-sm-6 col-sm-3 col-sm-offset-6']) !!}
+					{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+				</fieldset>
+			{!! Form::close() !!}
+		</div>
+	</div>
 
 @stop
 
