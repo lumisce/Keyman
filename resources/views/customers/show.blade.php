@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/assets/css/requests.css">
 <link rel="stylesheet" href="/assets/css/tablecard.css">
 <link rel="stylesheet" href="/assets/css/account.css">
- 
+  
 @section('content')
 	<hr>
 	<br />
