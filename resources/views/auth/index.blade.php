@@ -10,7 +10,6 @@
         background-color: #f3f3f3;
     }
     li#usersButton{
-        border-left-color: rgb(232,131,52);
         background-color: #f3f3f3;
     }
 
