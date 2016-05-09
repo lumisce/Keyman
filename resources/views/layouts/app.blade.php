@@ -8,10 +8,11 @@
     <title>KeyMan</title>
 
     <!-- Styles -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> --}}
     <link rel="stylesheet" href="/assets/css/vendor/tether.css">
     <link rel="stylesheet" href="/assets/css/vendor/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/vendor/select2.css">
+    <link rel="stylesheet" href="/assets/css/vendor/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/layout.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
