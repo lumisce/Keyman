@@ -382,17 +382,17 @@
 				<tr id ="override">
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					@if ($showCustomer)
-						<td>
+						<td style="text-align: left;">
 							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
-								{{ $krequest->customer->fullNameMI }}
+								<span style="text-transform: uppercase">{{ $krequest->customer->last_name  }}</span>, {{ $krequest->customer->first_name  }} {{ $krequest->customer->middle_name[0]  }}.
 							</a>
 						</td>
 					@endif
-					<td>{{ $krequest->insurance->name }}</td>
-					<td>{{ $krequest->type ? $krequest->type->name : ''}}</td>
+					<td style="text-align: left;">{{ $krequest->insurance->name }}</td>
+					<td style="text-transform: uppercase;">{{ $krequest->type ? $krequest->type->name : ''}}</td>
 					<td>{{ explode(' ', $krequest->turnaround_date)[0] }}</td>
 					@if ($showUser)
-						<td><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
+						<td style="text-align: left;"><a href="{{ action('Auth\AuthController@show', [$krequest->users()->first()->id]) }}" class="">{{ $krequest->users()->first()->name }}</a></td>
 					@endif
 					<td>
 						@if ($krequest->status == 'COMPLETED')
@@ -416,7 +416,11 @@
 
 					<td id="progressColumn">{{ $krequest->users()->first()->pivot->progress }} </td>
 					<td id="buttoncontainer">
-						<ul style="display: inline-flex; word-spacing: 3px; list-style: none; ">
+						@if (Auth::user()->isAdmin())
+							<ul class="ulbutton"style="display: inline-flex; word-spacing: 3px; list-style: none;">
+						@else
+							<ul style="display: inline-flex; word-spacing: 3px; list-style: none;">
+						@endif
 						 
 						@if ($krequest->status == 'ONGOING')
 							{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@update', $krequest->customer->id, $krequest->id], 'class' => 'updateForm', 'style' => 'margin-bottom:0;']) !!}

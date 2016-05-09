@@ -30,7 +30,7 @@
 	<table class="table table-hover cards-table" id ="small">
 		<thead id="reqTypeTHead">
 			<tr>
-				<th>Name</th>
+				<th>Request Type</th>
 				<th>Ideal Turnaround</th>
 				<th></th>
 			</tr>
