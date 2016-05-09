@@ -152,6 +152,27 @@ i, b{
     margin: 0 auto;
 }
 
+.alert{
+    border:none;
+    color: #ffffff;
+    border-radius: 0;
+    width:80%;
+    margin: auto;
+}
+
+.alert-success{
+    background-color: #59CC80;
+}
+
+.alert-danger{
+    background-color: #E86659;
+}
+.alert-warning{
+    background-color: #EBAB3D;
+}
+.alert-info{
+    background-color: #60CACC;
+}
 
 @media (max-width:768px){
     img#logoLarge {
