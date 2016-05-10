@@ -12,11 +12,20 @@ use App\Provider;
 
 class PagesController extends Controller
 {
+    /**
+     * Launch Page
+     * @return view
+     */
     public function index()
     {
         return view('index');
     }
 
+    /**
+     * Account Page for logged in User
+     * @param  Request $request
+     * @return view
+     */
     public function account(Request $request)
     {
         $out = (new RequestsController)->sort($request);
@@ -30,8 +39,5 @@ class PagesController extends Controller
         $requests = $out['requests']->intersect($old);
         
         return view('account', compact('showUser', 'showCustomer', 'requests', 'sortby', 'order', 'sortMethod'));
-
-
-
     }
 }
