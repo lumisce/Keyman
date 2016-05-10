@@ -48,6 +48,7 @@
 					<th>Insurance Plan</th>
 					<th>Provider</th>
 					<th>Type</th>
+					<th>Valid Until</th>
 					@if (Auth::user()->isAdmin())
 						<th></th>
 					@endif
@@ -59,6 +60,7 @@
 					<td>{{ $insurance->name }}</td>
 					<td><a href="{{ action('ProvidersController@show', [$insurance->provider->id]) }}" class="">{{ $insurance->provider->name }}</a></td>
 					<td>{{ $insurance->insuranceType ? $insurance->insuranceType->name : '' }}</td>
+					<td>{{ explode(' ', $insurance->pivot->valid_until)[0] }}</td>
 					@if (Auth::user()->isAdmin())
 						<td id ="buttonContainer">
 							{!! Form::open(['method' => 'DELETE', 'action' => ['CustomerInsurancesController@destroy', $customer->id, $insurance->id], 'class' => 'deleteForm']) !!}
