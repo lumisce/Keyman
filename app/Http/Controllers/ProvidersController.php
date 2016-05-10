@@ -81,8 +81,15 @@ class ProvidersController extends Controller
     public function destroy(Provider $provider, Request $request)
     {
         $name = $provider->name;
+        foreach ($provider->insurances as $insurance) {
+            $customers = $insurance->customers;
+            $insurance->delete();
+            foreach ($customers as $customer) {
+                $customer->total_requests = $customer->requests()->count();
+                $customer->save();
+            }
+        }
         $provider->delete();
-
         flash()->success($name . ' has been deleted!');
         return redirect('providers');
     }
