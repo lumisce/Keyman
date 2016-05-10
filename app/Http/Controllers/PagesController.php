@@ -17,21 +17,6 @@ class PagesController extends Controller
         return view('index');
     }
 
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function browse()
-    {
-        $customers = Customer::select(DB::raw("CONCAT(first_name, ' ', last_name, ', ', middle_name) AS full_name, id"))
-            ->pluck('full_name', 'id');
-        $customers->prepend(null, 0);
-        $providers = Provider::pluck('name', 'id');
-        $providers->prepend(null, 0);
-        return view('browse', compact('customers', 'providers'));
-    }
-
     public function account(Request $request)
     {
         $out = (new RequestsController)->sort($request);
