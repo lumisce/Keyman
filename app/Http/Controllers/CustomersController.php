@@ -183,7 +183,11 @@ class CustomersController extends Controller
         $early = 0;
         $onTime = 0;
         foreach ($completedList as $completed) {
-            $ideal = $completed->created_at->addDays($completed->type->ideal_turnaround)->startOfDay();
+            if ($completed->type) {
+                $ideal = $completed->created_at->addDays($completed->type->ideal_turnaround)->startOfDay();
+            } else {
+                $ideal = $completed->created_at->startOfDay();
+            }
 
             if ($completed->turnaround_date->startOfDay()->gt($ideal)) {
                 $overdue += 1;
