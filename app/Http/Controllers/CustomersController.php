@@ -122,7 +122,7 @@ class CustomersController extends Controller
             }
 
         } else {
-            $sortby = '';
+            $sortby = 'name';
             $customers = Customer::orderByName($order)->get();
         }
 

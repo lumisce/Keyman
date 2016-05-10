@@ -148,8 +148,9 @@ class RequestsController extends Controller
             }
 
         } else {
-            $sortby = '';
-            $requests = KeymanRequest::all();
+            $sortby = 'id';
+            $order = 'desc';
+            $requests = KeymanRequest::orderBy($sortby, $order)->get();
         }
 
         return ['sortby' => $sortby, 'order' => $order, 'requests' => $requests];

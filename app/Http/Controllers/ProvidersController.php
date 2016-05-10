@@ -117,8 +117,8 @@ class ProvidersController extends Controller
             $providers = Provider::orderBy($sortby, $order)->get();
 
         } else {
-            $sortby = null;
-            $providers = Provider::orderBy('name', $order)->get();
+            $sortby = 'name';
+            $providers = Provider::orderBy($sortby, $order)->get();
         }
 
         return ['sortby' => $sortby, 'order' => $order, 'providers' => $providers];

@@ -164,8 +164,8 @@ class AuthController extends Controller
             $users = User::orderBy($sortby, $order)->get();
 
         } else {
-            $sortby = null;
-            $users = User::orderBy('name', $order)->get();
+            $sortby = 'name';
+            $users = User::orderBy($sortby, $order)->get();
         }
 
         return ['sortby' => $sortby, 'order' => $order, 'users' => $users];
