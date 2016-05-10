@@ -92,7 +92,7 @@ class RequestsController extends Controller
 
     public function complete(Request $request, Customer $customer, KeymanRequest $krequest)
     {
-        $tdate = $krequest->turnaround_date;
+        $tdate = $krequest->turnaround_date->startOfDay();
 
         if (Carbon::now()->startOfDay()->gt($tdate)) {
             $completed = 'overdue';
