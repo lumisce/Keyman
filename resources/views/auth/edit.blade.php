@@ -12,7 +12,7 @@
     <div class="col-sm-8 col-sm-offset-2">
         <div class= "panel panel-default">
             {!! Form::model(Auth::user(), ['method' => 'PATCH', 'action' => ['Auth\AuthController@update', Auth::id()], 'class'=>'form-horizontal']) !!}
-                @include('auth._form', ['submitButtonText' => 'Update'])
+                @include('auth._form', ['submitButtonText' => 'Update', 'passwordText' => 'New Password:'])
             {!! Form::close() !!}
     </div>
 </div>

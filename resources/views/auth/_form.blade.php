@@ -17,7 +17,7 @@
 </fieldset>
 
 <fieldset class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-    <label class="label-requests col-xs-3">Password:</label>
+    <label class="label-requests col-xs-3">{{ $passwordText }}</label>
     {!! Form::password('password', ['class' => 'form-control col-sm-9']) !!}
 </fieldset>
 
