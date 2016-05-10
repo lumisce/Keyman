@@ -95,18 +95,19 @@ class RequestsController extends Controller
         $tdate = $krequest->turnaround_date;
 
         if (Carbon::now()->startOfDay()->gt($tdate)) {
-            $completed = ' (overdue)';
+            $completed = 'overdue';
 
         } elseif (Carbon::now()->startOfDay()->lt($tdate)) {
-            $completed = ' (early)';
+            $completed = 'early';
 
         } else {
-            $completed = ' (on time)';
+            $completed = 'on time';
         }
 
 
-        $krequest->users()->sync([\Auth::user()->id => ['progress' => date('Y-m-d'). $completed]]);
+        $krequest->users()->sync([\Auth::user()->id => ['progress' => $completed]]);
         $krequest->status = 'COMPLETED';
+        $krequest->turnaround_date = Carbon::now()->toDateTimeString();
         $krequest->save();
 
         flash()->info('Notify ' . $customer->fullName . ' at ' . $customer->email .' or ' . $customer->phone_num);
