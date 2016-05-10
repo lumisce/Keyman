@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="/assets/css/add-edit.css">
-		<fieldset class="form-group">
+		<fieldset class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 			{!! Form::label('name', 'Name:', ['class' => 'label-requests col-xs-3']) !!}
 			{!! Form::text('name', null, ['class' => 'col-sm-9 form-control']) !!}
 		</fieldset>
 
-		<fieldset class="form-group">
+		<fieldset class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
 			{!! Form::label('type', 'Type:', ['class' => 'label-requests col-xs-3']) !!}
 			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control']) !!}
 		</fieldset>
 		
-		<fieldset class="form-group">
+		<fieldset class="form-group{{ $errors->has('payment') ? ' has-error' : '' }}">
 			{!! Form::label('payment', 'Price:', ['class' => 'label-requests col-xs-3']) !!}
 			{!! Form::input('number', 'payment', $insurance->payment ? $insurance->payment : 0.00, ['class' => 'col-sm-9 form-control', 'step' => '0.01']) !!}
 		</fieldset>

@@ -77,7 +77,8 @@ class RequestTypesController extends Controller
     private function getRules()
     {
         return [
-            'name' => 'required|regex:/^[(a-zA-Z\s)]+$/u|unique:request_types'
+            'name' => 'required|regex:/^[(a-zA-Z\s)]+$/u|unique:request_types',
+            'ideal_turnaround' => 'required|integer|min:0'
         ];
     }
 }

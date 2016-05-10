@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Customer extends Model
 {
@@ -27,7 +28,12 @@ class Customer extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
+        return $this->last_name . ', ' . $this->first_name . ' ' . $this->middle_name;
+    }
+
+    public function getFullNameMIAttribute()
+    {
+        return Str::upper($this->last_name) . ', ' . $this->first_name . ' ' . ($this->middle_name ? $this->middle_name[0] . '.' : '');
     }
 
     // sortby = total_requests, name, email

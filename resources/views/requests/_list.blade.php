@@ -557,7 +557,7 @@
 					@if ($showCustomer)
 						<td style="text-align: left;"">
 							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
-								<span style="text-transform: uppercase">{{ $krequest->customer->last_name  }}</span>, {{ $krequest->customer->first_name  }} {{ $krequest->customer->middle_name[0]  }}.
+								{{ $krequest->customer->fullNameMI }}
 							</a>
 						</td>
 					@endif

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/assets/css/add-edit.css">
-		<fieldset class="form-group">
+		<fieldset class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 			{!! Form::label('name', 'Name:', ['class' => 'label-requests col-md-3']) !!}
 			{!! Form::text('name', null, ['class' => 'form-control col-md-9']) !!}
 		</fieldset>

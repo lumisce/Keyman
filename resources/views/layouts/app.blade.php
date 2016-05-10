@@ -8,10 +8,11 @@
     <title>KeyMan</title>
 
     <!-- Styles -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> --}}
     <link rel="stylesheet" href="/assets/css/vendor/tether.css">
     <link rel="stylesheet" href="/assets/css/vendor/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/vendor/select2.css">
+    <link rel="stylesheet" href="/assets/css/vendor/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/layout.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -38,10 +39,7 @@
             <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
+                    @if (Auth::check())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="usernameMenu" data-toggle="dropdown" role="button" aria-expanded="false" style ="text-transform: uppercase;">
                                 <i id="i">{{ Auth::user()->name }}</i> <i class="fa fa-btn fa-user fa-lg"> </i>
