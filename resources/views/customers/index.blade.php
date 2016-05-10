@@ -315,7 +315,7 @@
 
 				<td style="text-align: left">
                     <a href="{{ action('CustomersController@show', [$customer->id]) }}" class="">
-                       {{ $customer->fullNameMI }}
+                    {{ $customer->fullNameMI }}
                     </a>
                 </td>
 				<td style="text-align: left;">{{ $customer->email }}</td>

@@ -6,7 +6,7 @@
 
 		<fieldset class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
 			{!! Form::label('type', 'Type:', ['class' => 'label-requests col-xs-3']) !!}
-			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control']) !!}
+			{!! Form::select('type', $types, isset($selected) ? $selected : 0, ['class' => 'col-sm-9 form-control','id' => 'type-select']) !!}
 		</fieldset>
 		
 		<fieldset class="form-group{{ $errors->has('payment') ? ' has-error' : '' }}">
@@ -22,6 +22,7 @@
 		@section('footer')
 			<script>
 				$('#type-select').select2();
+				$(".select2-selection").addClass("form-control");
 			    $(".deleteForm").on("submit", function(){
 			        if (confirm("Do you want to delete this Insurance?")) {
 			        	if(confirm("Are you sure? This will delete the insurance from customers' records. It will also delete the requests made for this insurance.")) {
