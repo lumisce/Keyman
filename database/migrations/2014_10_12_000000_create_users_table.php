@@ -22,6 +22,16 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert(
+            [
+                'name' => 'Admin',
+                'email' => 'admin@keyman.com',
+                'phone_num' => '09112223333',
+                'password' => bcrypt('adminkeyman'),
+                'is_admin' => true,
+            ]
+        );
     }
 
     /**
