@@ -555,7 +555,7 @@
 				<tr id ="override">
 					<td>{{ explode(' ',$krequest->created_at)[0] }}</td>
 					@if ($showCustomer)
-						<td style="text-align: left;"">
+						<td style="text-align: left;">
 							<a href="{{ action('CustomersController@show', [$krequest->customer->id]) }}" class="">
 								{{ $krequest->customer->fullNameMI }}
 							</a>
@@ -600,22 +600,22 @@
 						@endif
 		
 						@if ($krequest->status == 'PENDING' && Auth::id() == $krequest->users()->first()->id)
-						{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@complete', $krequest->customer->id, $krequest->id], 'class' => 'completeForm', 'style' => 'margin-bottom:0;']) !!}
-							<li> 
-								{!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
-							</li>
-						{!! Form::close() !!}
+							{!! Form::open(['method' => 'PATCH', 'action' => ['RequestsController@complete', $krequest->customer->id, $krequest->id], 'class' => 'completeForm', 'style' => 'margin-bottom:0;']) !!}
+								<li> 
+									{!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
+								</li>
+							{!! Form::close() !!}
 						@endif
 
-					@if (Auth::user()->isAdmin())
+						@if (Auth::user()->isAdmin())
 							{!! Form::open(['method' => 'DELETE', 'action' => ['RequestsController@destroy', $krequest->customer->id, $krequest->id], 'class' => 'deleteForm', 'style' => 'margin-bottom:0;']) !!}
 								<li> 
 									{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 								</li>
 							{!! Form::close() !!}
+						@endif
 						</ul>
 					</td>
-					@endif
 				</tr>
 			@endforeach
 			</tbody>

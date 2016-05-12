@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/assets/css/add-edit.css">
 
 		<fieldset class="form-group">
@@ -12,17 +11,6 @@
 
 		@section('footer')
 			<script>
-				// $('#type-select').select2();
 				$('#plan-select').select2();
-				// // $('#plan-select').attr('disabled', 'disabled');
-
-				// $('#type-select').on('change', function(e) {
-				// 	if ($('#type-select').val() != 0) {
-				// 		$('#plan-select').removeAttr('disabled');
-				// 	};
-				// 	if ($('#type-select').val() == 0) {
-				// 		$('#plan-select').attr('disabled', 'disabled');
-				// 	};
-				// });
 			</script>
 		@stop
