@@ -12,15 +12,17 @@
 1. install [composer](https://getcomposer.org/)
 2. install laravel: `composer global require "laravel/installer"`
 3. create a laravel project: `laravel new PROJECT_NAME`
-4. `composer require "illuminate/html":"5.0.*"`
-5. `composer require laracasts/flash`
-6. replace `bindShared()` with `singleton()`
-7. copy the files from the zip to the project directory
-8. create database in mysql
-9. configure the `.env` file
-10. `php artisan migrate`
-11. `php artisan serve`
-12. and there you go!
+4. open cmd within the project
+5. cmd: `composer require "illuminate/html":"5.0.*"`
+6. cmd: `composer require laracasts/flash`
+7. replace `bindShared()` with `singleton()` in HtmlServiceProvider.php
+8. copy the files from the zip to the project directory
+9. create database in mysql
+10. configure the `.env` file (DB_*)
+11. cmd: `php artisan migrate`
+12. cmd: `php artisan db:seed`
+13. cmd: `php artisan serve`
+14. You can now log in with 'admin@keyman.com' and 'password'
 
 ### Important folders and files
 - app (model files)
