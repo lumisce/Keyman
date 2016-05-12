@@ -60,7 +60,7 @@ class RequestsController extends Controller
     {
         $this->validate($request, $this->getRules());
         $ideal = RequestType::findOrFail($request['request_type_id'])->ideal_turnaround;
-        $request['turnaround_date'] = Carbon::parse($request['turnaround_date'])->addDays($ideal)->toDateTimeString();
+        $request['turnaround_date'] = Carbon::now()->addDays($ideal)->toDateTimeString();
         $request['status'] = 'ONGOING';
 
         $request['customer_id'] = $customer->id;
@@ -99,6 +99,7 @@ class RequestsController extends Controller
         $krequest->save();
 
         $provider = $krequest->insurance->provider;
+        
         flash()->info('Send request to ' . $provider->name . ' at ' . $provider->email .' or ' . $provider->phone_num);
         return redirect()->back();
     }
