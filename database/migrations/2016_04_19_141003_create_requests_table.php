@@ -30,7 +30,7 @@ class CreateRequestsTable extends Migration
                 ->on('request_types')
                 ->onDelete('set null');
             $table->string('status');
-            $table->timestamp('turnaround_date');
+            $table->dateTime('turnaround_date');
             $table->timestamps();
         });
     }
